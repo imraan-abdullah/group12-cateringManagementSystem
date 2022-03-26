@@ -5,13 +5,13 @@ package za.ac.cput.entity;
  * 219361738
  * Date: 26 March 2022
  * */
-public class Chef
+public class WaitingStaff
 {
     private String employeeId;
     private String firstName;
     private String lastName;
 
-    private Chef(Builder builder)
+    private WaitingStaff(Builder builder)
     {
         this.employeeId = builder.employeeId;
         this.firstName = builder.firstName;
@@ -50,7 +50,7 @@ public class Chef
 
     @Override
     public String toString() {
-        return "Chef{" +
+        return "WaitingStaff{" +
                 "employeeId='" + employeeId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -81,18 +81,17 @@ public class Chef
             return this;
         }
 
-        public Builder copy(Chef chef)
+        public Builder copy(WaitingStaff waitingStaff)
         {
-            this.employeeId = chef.employeeId;
-            this.firstName = chef.firstName;
-            this.lastName = chef.lastName;
+            this.employeeId = waitingStaff.employeeId;
+            this.firstName = waitingStaff.firstName;
+            this.lastName = waitingStaff.lastName;
             return this;
         }
 
-        public Chef build()
+        public WaitingStaff build()
         {
-            return new Chef(this);
+            return new WaitingStaff(this);
         }
-
     }
 }
