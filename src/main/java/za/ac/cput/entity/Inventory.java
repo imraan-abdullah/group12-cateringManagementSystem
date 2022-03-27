@@ -4,7 +4,7 @@ package za.ac.cput.entity;
  * Inventory.java
  * Entity for the Inventory
  * Author: Thina Mzosindiso Nontwabaza (219189153)
- * Date: 26 March 2022
+ * Date: 26 March 2022.
  */
 public class Inventory {
     private int itemID;
