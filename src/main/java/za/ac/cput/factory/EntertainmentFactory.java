@@ -1,19 +1,27 @@
 package za.ac.cput.factory;
 
+/*
+ * EntertainmentFactory.java - factory class for entertainment
+ * Author: Imraan Abdullah
+ * 219361738
+ * Date: 29 March 2022
+ * */
+
+import za.ac.cput.entity.Chef;
 import za.ac.cput.entity.Entertainment;
 
 public class EntertainmentFactory
 {
     public static Entertainment createEntertainment(String entertainmentType, int cost)
     {
-        if(entertainmentType == null || entertainmentType.equals("") || entertainmentType.matches(".*\\d.*"))
+        if(src.main.java.za.ac.cput.util.Helper.isNullOrEmpty(entertainmentType))
+            return null;
+        if(src.main.java.za.ac.cput.util.Helper.isEmptyOrNegitive(cost))
             return null;
 
-        if(cost == 0 || cost<0)
-            return null;
-
-        return new Entertainment.Builder().setEntertainmentType(entertainmentType)
+        Entertainment entertainment = new Entertainment.Builder().setEntertainmentType(entertainmentType)
                 .setCost(cost)
                 .build();
+        return entertainment;
     }
 }
