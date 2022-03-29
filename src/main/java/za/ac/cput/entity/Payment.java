@@ -7,10 +7,10 @@ package za.ac.cput.entity;
 
 public class Payment {
     private String clientNum;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNum;
+    private String amount;
+    private String paymentType;
+    private String date;
+    private String venueId;
 
     private Payment() {
 
@@ -18,101 +18,99 @@ public class Payment {
 
     private Payment(Builder builder) {
         this.clientNum = builder.clientNum;
-        this.firstName = builder.firstName;
-        this.lastName = builder.lastName;
-        this.email = builder.email;
-        this.phoneNum = builder.phoneNum;
+        this.amount = builder.amount;
+        this.paymentType = builder.paymentType;
+        this.date = builder.date;
+        this.venueId = builder.venueId;
     }
 
     public String getClientNum() {
         return clientNum;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getAmount() {
+        return amount;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPaymentType() {
+        return paymentType;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDate() {
+        return date;
     }
 
-    public String getPhoneNum() {
-        return phoneNum;
+    public String getVenueId() {
+        return venueId;
     }
 
     public void setClientNum(String clientNum) {
         this.clientNum = clientNum;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setDate(String date) {this.date = date;}
 
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
+    public void setVenueId(String venueId) {
+        this.venueId = venueId;
     }
 
     @Override
     public String toString() {
         return "Payment{" +
                 "clientNum='" + clientNum + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNum='" + phoneNum + '\'' +
+                ", amount='" + amount + '\'' +
+                ", paymentType='" + paymentType + '\'' +
+                ", date='" + date + '\'' +
+                ", venueId='" + venueId + '\'' +
                 '}';
     }
 
     public static class Builder {
         private String clientNum;
-        private String firstName;
-        private String lastName;
-        private String email;
-        private String phoneNum;
+        private String amount;
+        private String paymentType;
+        private String date;
+        private String venueId;
 
         public Builder setClientNum(String clientNum) {
             this.clientNum = clientNum;
             return this;
         }
 
-        public Builder setFirstName(String firstName) {
-            this.firstName = firstName;
+        public Builder setAmount(String amount) {
+            this.amount = amount;
             return this;
         }
 
-        public Builder setLastName(String lastName) {
-            this.lastName = lastName;
+        public Builder setPaymentType(String paymentType) {
+            this.paymentType = paymentType;
             return this;
         }
 
-        public Builder setEmail(String email) {
-            this.email = email;
+        public Builder setDate(String date) {
+            this.date = date;
             return this;
         }
 
-        public Builder setPhoneNum(String phoneNum) {
-            this.phoneNum = phoneNum;
+        public Builder setVenueId(String venueId) {
+            this.venueId = venueId;
             return this;
         }
 
         public Builder copy(Payment payment) {
             this.clientNum = payment.clientNum;
-            this.firstName = payment.firstName;
-            this.lastName = payment.lastName;
-            this.email = payment.email;
-            this.phoneNum = payment.phoneNum;
+            this.amount = payment.amount;
+            this.paymentType = payment.paymentType;
+            this.date = payment.date;
+            this.venueId = payment.venueId;
             return this;
         }
 
