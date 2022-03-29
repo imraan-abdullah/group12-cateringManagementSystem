@@ -8,15 +8,16 @@ package za.ac.cput.factory;
  * */
 
 import za.ac.cput.entity.Chef;
+import za.ac.cput.util.Helper;
 
 public class ChefFactory
 {
     public static Chef createChef(String firstName, String lastName)
     {
-        if(src.main.java.za.ac.cput.util.Helper.isNullOrEmpty(firstName) || src.main.java.za.ac.cput.util.Helper.isNullOrEmpty(lastName))
-            return null;
+        String employeeId = Helper.generateId();
 
-        String employeeId = src.main.java.za.ac.cput.util.Helper.generateId();
+        if(Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName))
+            return null;
 
         Chef chef = new Chef.Builder().setEmployeeId(employeeId)
                 .setFirstName(firstName)

@@ -1,6 +1,6 @@
 package za.ac.cput.factory;
 import za.ac.cput.entity.Inventory;
-import src.main.java.za.ac.cput.util.Helper;
+import za.ac.cput.util.Helper;
 
 /*
  * Inventory.java

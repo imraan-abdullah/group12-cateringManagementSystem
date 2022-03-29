@@ -1,4 +1,4 @@
-package src.main.java.za.ac.cput.entity;
+package za.ac.cput.entity;
 
 /*Booking.java Entity for the Booking
 Author: Mariam Gallie (219094837)

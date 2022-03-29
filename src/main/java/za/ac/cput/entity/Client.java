@@ -1,4 +1,4 @@
-package src.main.java.za.ac.cput.entity;
+package za.ac.cput.entity;
 
 /*Client.java Entity for the Client
 Author: Mariam Gallie (219094837)
