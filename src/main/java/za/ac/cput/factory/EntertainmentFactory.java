@@ -9,14 +9,13 @@ package za.ac.cput.factory;
 
 import za.ac.cput.entity.Chef;
 import za.ac.cput.entity.Entertainment;
+import za.ac.cput.util.Helper;
 
 public class EntertainmentFactory
 {
     public static Entertainment createEntertainment(String entertainmentType, int cost)
     {
-        if(src.main.java.za.ac.cput.util.Helper.isNullOrEmpty(entertainmentType))
-            return null;
-        if(src.main.java.za.ac.cput.util.Helper.isEmptyOrNegitive(cost))
+        if(Helper.isNullOrNegitive(cost))
             return null;
 
         Entertainment entertainment = new Entertainment.Builder().setEntertainmentType(entertainmentType)

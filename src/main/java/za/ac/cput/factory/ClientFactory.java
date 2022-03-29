@@ -1,7 +1,8 @@
-package src.main.java.za.ac.cput.factory;
+package za.ac.cput.factory;
 
-import src.main.java.za.ac.cput.entity.Client;
-import src.main.java.za.ac.cput.util.Helper;
+import za.ac.cput.entity.Client;
+import za.ac.cput.util.Helper;
+import za.ac.cput.util.Helper;
 
 /*ClientFactory.java Factory for the ClientFactory
 Author: Mariam Gallie (219094837)
