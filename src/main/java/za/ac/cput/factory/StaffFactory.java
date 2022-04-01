@@ -5,7 +5,7 @@ import za.ac.cput.entity.Staff;
 import za.ac.cput.util.Helper;
 
 /* Staff.java
- Entity for the Staff
+ Entity for the Staff..
  Author: Velenkosini Prince Jeza (218191669)
  Date: 29 March 2022
 */
