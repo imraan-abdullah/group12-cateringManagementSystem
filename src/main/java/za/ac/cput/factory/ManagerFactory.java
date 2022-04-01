@@ -1,7 +1,7 @@
 package za.ac.cput.factory;
 
 import za.ac.cput.entity.Manager;
-import src.main.java.za.ac.cput.util.Helper;
+import za.ac.cput.util.Helper;
 
 
 /* Staff.java

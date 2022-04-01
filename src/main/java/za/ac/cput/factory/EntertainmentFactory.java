@@ -15,6 +15,9 @@ public class EntertainmentFactory
 {
     public static Entertainment createEntertainment(String entertainmentType, int cost)
     {
+        if(Helper.isNullOrEmpty(entertainmentType))
+            return null;
+
         if(Helper.isNullOrNegitive(cost))
             return null;
 
