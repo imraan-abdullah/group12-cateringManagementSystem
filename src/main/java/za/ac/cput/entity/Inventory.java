@@ -7,7 +7,7 @@ package za.ac.cput.entity;
  * Date: 26 March 2022.
  */
 public class Inventory {
-    private int itemID;
+    private String itemID;
     private String itemDescription;
     private int itemQuantity;
     private String stockAvailability;
@@ -21,7 +21,7 @@ public class Inventory {
     }
 
     //Getters
-    public int getItemID() {
+    public String getItemID() {
         return itemID;
     }
 
@@ -49,13 +49,13 @@ public class Inventory {
     }
 
     public static class Builder{
-        private int itemID;
+        private String itemID;
         private String itemDescription;
         private int itemQuantity;
         private String stockAvailability;
 
         //Setters
-        public Builder setItemID(int itemID) {
+        public Builder setItemID(String itemID) {
             this.itemID = itemID;
             return this;
         }
