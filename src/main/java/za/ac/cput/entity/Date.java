@@ -6,18 +6,22 @@ package za.ac.cput.entity;
 */
 
 public class Date {
+    private String dateNum;
     private String venueAvailability;
     private String venueId;
     private String bookingNum;
 
-    private Date() {
-
-    }
+    private Date() {}
 
     private Date(Builder builder) {
+        this.dateNum = builder.dateNum;
         this.venueAvailability = builder.venueAvailability;
         this.venueId = builder.venueId;
         this.bookingNum = builder.bookingNum;
+    }
+
+    public String getDateNum() {
+        return dateNum;
     }
 
     public String getVenueAvailability() {
@@ -30,6 +34,10 @@ public class Date {
 
     public String getBookingNum() {
         return bookingNum;
+    }
+
+    public void setDateNum(String dateNum) {
+        this.dateNum = dateNum;
     }
 
     public void setVenueAvailability(String venueAvailability) {
@@ -47,16 +55,23 @@ public class Date {
     @Override
     public String toString() {
         return "Date{" +
-                "venueAvailability='" + venueAvailability + '\'' +
+                "dateNum='" + dateNum + '\'' +
+                ", venueAvailability='" + venueAvailability + '\'' +
                 ", venueId='" + venueId + '\'' +
                 ", bookingNum='" + bookingNum + '\'' +
                 '}';
     }
 
     public static class Builder {
+        private String dateNum;
         private String venueAvailability;
         private String venueId;
         private String bookingNum;
+
+        public Builder setDateNum(String dateNum) {
+            this.dateNum = dateNum;
+            return this;
+        }
 
         public Builder setVenueAvailability(String venueAvailability) {
             this.venueAvailability = venueAvailability;
@@ -74,9 +89,9 @@ public class Date {
         }
 
         public Builder copy(Date date) {
+            this.dateNum = date.dateNum;
             this.venueAvailability = date.venueAvailability;
             this.venueId = date.venueId;
-            this.bookingNum = date.bookingNum;
             return this;
         }
 
