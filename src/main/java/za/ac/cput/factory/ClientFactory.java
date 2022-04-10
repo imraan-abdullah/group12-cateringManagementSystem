@@ -11,10 +11,9 @@ Date: 28 March 2022
 
 public class ClientFactory {
 
-    public static Client createClient(String clientNum ,String firstName,String lastName, String email,String phoneNum) {
+    public static Client createClient(String firstName,String lastName, String email,String phoneNum) {
         String clientId = Helper.generateId();
         Client client = new Client.Builder().setClientNum(clientId)
-                .setClientNum(clientNum)
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setEmail(email)
