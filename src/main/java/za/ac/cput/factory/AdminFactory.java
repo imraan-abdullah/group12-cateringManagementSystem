@@ -1,13 +1,13 @@
-package za.ac.cput.factory;
-
-import za.ac.cput.entity.Admin;
-
 /*
 AdminFactory.java
 Factory class for Admin
 Author: Ameer Samsodien (220005060)
 Date : 29 March 2022
 */
+
+package za.ac.cput.factory;
+
+import za.ac.cput.entity.Admin;
 
 public class AdminFactory {
 
@@ -27,9 +27,9 @@ public class AdminFactory {
         if (phoneNum.equals("") || phoneNum == null)
             return null;
 
-        return new Admin.Builder().setadminNum(adminNum)
-                .setfirstName(firstName)
-                .setlastName(lastName)
+        return new Admin.Builder().setAdminNum(adminNum)
+                .setFirstName(firstName)
+                .setLastName(lastName)
                 .setEmail(email)
                 .setPhoneNum(phoneNum)
                 .build();

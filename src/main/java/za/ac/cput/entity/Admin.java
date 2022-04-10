@@ -1,11 +1,11 @@
-package za.ac.cput.entity;
-
 /*
 Admin.java
 Entity for the Admin
 Author: Ameer Samsodien (220005060)
 Date : 27 March 2022
 */
+
+package za.ac.cput.entity;
 
 public class Admin {
 
@@ -51,17 +51,17 @@ public class Admin {
         private String email;
         private String phoneNum;
 
-        public Builder setadminNum(String adminNum){
+        public Builder setAdminNum(String adminNum){
             this.adminNum = adminNum;
             return this;
         }
 
-        public Builder setfirstName(String firstName){
+        public Builder setFirstName(String firstName){
             this.firstName = firstName;
             return this;
         }
 
-        public Builder setlastName(String lastName){
+        public Builder setLastName(String lastName){
             this.lastName = lastName;
             return this;
         }
