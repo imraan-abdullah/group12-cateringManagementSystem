@@ -6,29 +6,20 @@ package za.ac.cput.factory;
 */
 
 import za.ac.cput.entity.Payment;
+import za.ac.cput.util.Helper;
+
 
 public class PaymentFactory {
-    public static Payment createPayment(String clientNum, String amount, String paymentType, String date, String venueId) {
-        if (clientNum.equals("") || clientNum == null)
-            return null;
-
-        if (amount.equals("") || amount == null)
-            return null;
-
-        if (paymentType.equals("") || paymentType == null)
-            return null;
-
-        if (date.equals("") || date == null)
-            return null;
-
-        if (venueId.equals("") || venueId == null)
-            return null;
-
-        return new Payment.Builder().setClientNum(clientNum)
+    public static Payment createPayment(String paymentNum, String clientNum, String amount, String paymentType, String date, String venueId) {
+        String paymentId = Helper.generateId();
+        Payment payment = new Payment.Builder().setPaymentNum(paymentId)
+                .setClientNum(clientNum)
                 .setAmount(amount)
                 .setPaymentType(paymentType)
                 .setDate(date)
                 .setVenueId(venueId)
                 .build();
+        return payment;
+
     }
 }

@@ -9,10 +9,9 @@ import za.ac.cput.util.Helper;
 
 public class BookingFactory {
 
-    public static Booking createBooking(String bookingNum,String clientNum,String date) {
+    public static Booking createBooking(String clientNum,String date) {
         String bookingId = Helper.generateId();
         Booking booking = new Booking.Builder().setBookingNum(bookingId)
-                .setBookingNum(bookingNum)
                 .setClientNum(clientNum)
                 .setDate(date)
                 .build();

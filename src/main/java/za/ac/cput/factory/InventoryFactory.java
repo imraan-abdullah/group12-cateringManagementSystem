@@ -12,7 +12,7 @@ import za.ac.cput.util.Helper;
 public class InventoryFactory {
 
     //Creating inventory objects
-    public static Inventory createInventory(int itemID, String itemDescription, int itemQuantity, String stockAvailability){
+    public static Inventory createInventory(String itemID, String itemDescription, int itemQuantity, String stockAvailability){
         Inventory inventory = new Inventory.Builder()
                 .setItemID(itemID)
                 .setItemDescription(itemDescription)

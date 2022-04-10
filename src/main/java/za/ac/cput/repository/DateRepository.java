@@ -35,16 +35,17 @@ public class DateRepository implements IDateRepository {
     }
 
     @Override
-    public Date read(String venueId) {
-        for(Date d : dateDB)
-            if (d.getVenueId().equals(venueId))
-                return d;
-        return null;
+    public Date read(String dateNum) {
+        Date date = dateDB.stream()
+                .filter(e-> e.getDateNum().equals(dateNum))
+                .findAny()
+                .orElse(null);
+        return date;
     }
 
     @Override
     public Date update(Date date) {
-        Date oldDate = read(date.getVenueId());
+        Date oldDate = read(date.getDateNum());
         if (oldDate != null) {
             dateDB.remove(oldDate);
             dateDB.add(date);
@@ -54,9 +55,9 @@ public class DateRepository implements IDateRepository {
     }
 
     @Override
-    public boolean delete(String venueId) {
-        Date dateToDelete = read(venueId);
-        if (dateToDelete == null)
+    public boolean delete(String dateNum) {
+        Date dateToDelete = read(dateNum);
+        if (dateNum == null)
             return false;
         dateDB.remove(dateToDelete);
         return true;
