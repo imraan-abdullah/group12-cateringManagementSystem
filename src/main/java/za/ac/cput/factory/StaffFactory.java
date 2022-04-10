@@ -4,8 +4,8 @@ package za.ac.cput.factory;
 import za.ac.cput.entity.Staff;
 import za.ac.cput.util.Helper;
 
-/* Staff.java
- Entity for the Staff..
+/* StaffFactory.java
+ Factory for the Staff
  Author: Velenkosini Prince Jeza (218191669)
  Date: 29 March 2022
 */
