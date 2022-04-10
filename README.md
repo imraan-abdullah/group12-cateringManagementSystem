@@ -6,5 +6,5 @@ ___
 
 ___
 
-![uml image for catering management system](uml/catering-System.png)
+![uml image for catering management system](uml/catering-management-System.png)
 
