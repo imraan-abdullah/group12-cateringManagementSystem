@@ -6,22 +6,26 @@ package za.ac.cput.entity;
 */
 
 public class Payment {
+    private String paymentNum;
     private String clientNum;
     private String amount;
     private String paymentType;
     private String date;
     private String venueId;
 
-    private Payment() {
-
-    }
+    private Payment() {}
 
     private Payment(Builder builder) {
+        this.paymentNum = builder.paymentNum;
         this.clientNum = builder.clientNum;
         this.amount = builder.amount;
         this.paymentType = builder.paymentType;
         this.date = builder.date;
         this.venueId = builder.venueId;
+    }
+
+    public String getPaymentNum() {
+        return paymentNum;
     }
 
     public String getClientNum() {
@@ -44,6 +48,10 @@ public class Payment {
         return venueId;
     }
 
+    public void setPaymentNum(String paymentNum) {
+        this.paymentNum = paymentNum;
+    }
+
     public void setClientNum(String clientNum) {
         this.clientNum = clientNum;
     }
@@ -56,7 +64,9 @@ public class Payment {
         this.paymentType = paymentType;
     }
 
-    public void setDate(String date) {this.date = date;}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public void setVenueId(String venueId) {
         this.venueId = venueId;
@@ -65,7 +75,8 @@ public class Payment {
     @Override
     public String toString() {
         return "Payment{" +
-                "clientNum='" + clientNum + '\'' +
+                "paymentNum='" + paymentNum + '\'' +
+                ", clientNum='" + clientNum + '\'' +
                 ", amount='" + amount + '\'' +
                 ", paymentType='" + paymentType + '\'' +
                 ", date='" + date + '\'' +
@@ -74,11 +85,17 @@ public class Payment {
     }
 
     public static class Builder {
+        private String paymentNum;
         private String clientNum;
         private String amount;
         private String paymentType;
         private String date;
         private String venueId;
+
+        public Builder setPaymentNum(String paymentNum) {
+            this.paymentNum = paymentNum;
+            return this;
+        }
 
         public Builder setClientNum(String clientNum) {
             this.clientNum = clientNum;
@@ -105,7 +122,8 @@ public class Payment {
             return this;
         }
 
-        public Builder copy(Payment payment) {
+        public Builder copy( Payment payment) {
+            this.paymentNum = payment.paymentNum;
             this.clientNum = payment.clientNum;
             this.amount = payment.amount;
             this.paymentType = payment.paymentType;
@@ -115,7 +133,7 @@ public class Payment {
         }
 
         public Payment build() {
-            return new Payment(this);
+            return new Payment (this);
         }
     }
 }
