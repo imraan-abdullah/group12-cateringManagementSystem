@@ -6,18 +6,20 @@ package za.ac.cput.entity;
 */
 
 public class Date {
+    private String bookingNum;
     private String venueAvailability;
     private String venueId;
-    private String bookingNum;
 
-    private Date() {
-
-    }
+    private Date() {}
 
     private Date(Builder builder) {
+        this.bookingNum = builder.bookingNum;
         this.venueAvailability = builder.venueAvailability;
         this.venueId = builder.venueId;
-        this.bookingNum = builder.bookingNum;
+    }
+
+    public String getBookingNum() {
+        return bookingNum;
     }
 
     public String getVenueAvailability() {
@@ -28,8 +30,8 @@ public class Date {
         return venueId;
     }
 
-    public String getBookingNum() {
-        return bookingNum;
+    public void setBookingNum(String bookingNum) {
+        this.bookingNum = bookingNum;
     }
 
     public void setVenueAvailability(String venueAvailability) {
@@ -40,23 +42,25 @@ public class Date {
         this.venueId = venueId;
     }
 
-    public void setBookingNum(String bookingNum) {
-        this.bookingNum = bookingNum;
-    }
 
     @Override
     public String toString() {
         return "Date{" +
+                ", bookingNum='" + bookingNum + '\'' +
                 "venueAvailability='" + venueAvailability + '\'' +
                 ", venueId='" + venueId + '\'' +
-                ", bookingNum='" + bookingNum + '\'' +
                 '}';
     }
 
     public static class Builder {
+        private String bookingNum;
         private String venueAvailability;
         private String venueId;
-        private String bookingNum;
+
+        public Builder setBookingNum(String bookingNum) {
+            this.bookingNum = bookingNum;
+            return this;
+        }
 
         public Builder setVenueAvailability(String venueAvailability) {
             this.venueAvailability = venueAvailability;
@@ -68,15 +72,11 @@ public class Date {
             return this;
         }
 
-        public Builder setBookingNum(String bookingNum) {
-            this.bookingNum = bookingNum;
-            return this;
-        }
 
         public Builder copy(Date date) {
+            this.bookingNum = date.bookingNum;
             this.venueAvailability = date.venueAvailability;
             this.venueId = date.venueId;
-            this.bookingNum = date.bookingNum;
             return this;
         }
 

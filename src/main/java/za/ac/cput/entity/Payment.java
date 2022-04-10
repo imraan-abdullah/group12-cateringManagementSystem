@@ -5,16 +5,17 @@ package za.ac.cput.entity;
     Date: 26 March 2022
 */
 
+import org.jetbrains.annotations.NotNull;
+
 public class Payment {
+
     private String clientNum;
     private String amount;
     private String paymentType;
     private String date;
     private String venueId;
 
-    private Payment() {
-
-    }
+    private Payment() {}
 
     private Payment(Builder builder) {
         this.clientNum = builder.clientNum;
@@ -105,7 +106,7 @@ public class Payment {
             return this;
         }
 
-        public Builder copy(Payment payment) {
+        public Builder copy( Payment payment) {
             this.clientNum = payment.clientNum;
             this.amount = payment.amount;
             this.paymentType = payment.paymentType;
@@ -115,7 +116,7 @@ public class Payment {
         }
 
         public Payment build() {
-            return new Payment(this);
+            return new Payment (this);
         }
     }
 }

@@ -35,10 +35,17 @@ public class PaymentRepository implements IPaymentRepository {
 
     @Override
     public Payment read(String clientNum) {
-        for(Payment p : paymentDB)
+        /*for(Payment p : paymentDB)
             if (p.getVenueId().equals(clientNum))
                 return p;
         return null;
+
+         */
+        Payment payment = paymentDB.stream()
+                .filter(e-> e.getClientNum().equals(clientNum))
+                .findAny()
+                .orElse(null);
+        return payment;
     }
 
     @Override
@@ -55,7 +62,7 @@ public class PaymentRepository implements IPaymentRepository {
     @Override
     public boolean delete(String clientNum) {
         Payment paymentToDelete = read(clientNum);
-        if (paymentToDelete == null)
+        if (clientNum == null)
             return false;
         paymentDB.remove(paymentToDelete);
         return true;

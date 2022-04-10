@@ -6,22 +6,22 @@ package za.ac.cput.factory;
 */
 
 import za.ac.cput.entity.Date;
+import za.ac.cput.util.Helper;
 
 public class DateFactory {
-    public static Date createDate(String venueAvailability, String venueId, String bookingNum) {
-        if (venueAvailability.equals("") || venueAvailability == null)
+    public static Date createDate(String venueAvailability, String venueId) {
+        /*if (!Helper.isNullOrEmpty(venueId))
             return null;
 
-        if (venueId.equals("") || venueId == null)
+        if (Helper.isNullOrEmpty(venueAvailability) || Helper.isNullOrEmpty(bookingNum))
             return null;
 
-        if (bookingNum.equals("") || bookingNum == null)
-            return null;
-
-        return new Date.Builder().setVenueAvailability(venueAvailability)
+         */
+        String bookingId = Helper.generateId();
+        Date date = new Date.Builder().setBookingNum(bookingId)
+                .setVenueAvailability(venueAvailability)
                 .setVenueId(venueId)
-                .setBookingNum(bookingNum)
                 .build();
-
+                return date;
     }
 }

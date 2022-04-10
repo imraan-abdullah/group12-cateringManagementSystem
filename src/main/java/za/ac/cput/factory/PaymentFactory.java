@@ -6,29 +6,33 @@ package za.ac.cput.factory;
 */
 
 import za.ac.cput.entity.Payment;
+import za.ac.cput.util.Helper;
 
 public class PaymentFactory {
-    public static Payment createPayment(String clientNum, String amount, String paymentType, String date, String venueId) {
-        if (clientNum.equals("") || clientNum == null)
+    public static Payment createPayment(String amount, String paymentType, String date, String venueId) {
+        /*if (!Helper.isNullOrEmpty(clientNum))
             return null;
 
-        if (amount.equals("") || amount == null)
+        if (!Helper.isNullOrEmpty(venueId) || Helper.isNullOrEmpty(amount))
             return null;
 
-        if (paymentType.equals("") || paymentType == null)
+        if (!Helper.isNullOrEmpty(paymentType) || Helper.isNullOrEmpty(date))
             return null;
 
-        if (date.equals("") || date == null)
-            return null;
-
-        if (venueId.equals("") || venueId == null)
-            return null;
-
-        return new Payment.Builder().setClientNum(clientNum)
+         */
+        String clientId = Helper.generateId();
+        Payment payment = new Payment.Builder().setClientNum(clientId)
                 .setAmount(amount)
                 .setPaymentType(paymentType)
                 .setDate(date)
                 .setVenueId(venueId)
                 .build();
+        return payment;
+        //return new Payment.Builder().setClientNum(clientNum)
+        //        .setAmount(amount)
+        //        .setPaymentType(paymentType)
+        //        .setDate(date)
+        //        .setVenueId(venueId)
+        //        .build();
     }
 }
