@@ -23,4 +23,7 @@ public class StringHelper {
             throw new IllegalArgumentException("invalid credentials provided");
         return id;
     }
+    public static boolean isNullOrNegative(int i) {
+        return(i == 0 || i<0);
+    }
 }
