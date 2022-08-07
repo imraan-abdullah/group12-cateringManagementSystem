@@ -3,7 +3,8 @@ LoginRepositoryTest.java
 Test class for Login Repository
 Author: Ameer Samsodien (220005060)
 Date : 8 April 2022
-*/
+*//*
+
 
 package za.ac.cput.repository;
 
@@ -59,4 +60,4 @@ class LoginRepositoryTest {
         System.out.println(repository.getAll());
     }
 
-}
+}*/

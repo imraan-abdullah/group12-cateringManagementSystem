@@ -3,7 +3,8 @@ AdminRepositoryTest.java
 Test class for Admin Repository
 Author: Ameer Samsodien (220005060)
 Date : 8 April 2022
-*/
+*//*
+
 
 package za.ac.cput.repository;
 
@@ -60,4 +61,4 @@ class AdminRepositoryTest {
         System.out.println("Show all: ");
         System.out.println(repository.getAll());
     }
-}
+}*/

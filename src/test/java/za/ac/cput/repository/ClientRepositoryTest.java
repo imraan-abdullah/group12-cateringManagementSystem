@@ -1,3 +1,4 @@
+/*
 package za.ac.cput.repository;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -6,10 +7,12 @@ import org.junit.jupiter.api.TestMethodOrder;
 import za.ac.cput.entity.Client;
 import za.ac.cput.factory.ClientFactory;
 
+*/
 /*ClientRepositoryTest.java Test for the ClientRepositoryTest
 Author: Mariam Gallie (219094837)
 Date: 5 April 2022
-*/
+*//*
+
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)
@@ -55,4 +58,4 @@ private static Client client = ClientFactory.createClient("Sam","Hills","SamH@gm
         System.out.println("show all: ");
         System.out.println(repository.getAll());
     }
-}
+}*/

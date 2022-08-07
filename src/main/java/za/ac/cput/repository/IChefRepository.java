@@ -7,10 +7,13 @@ package za.ac.cput.repository;
  * Date: 30 March 2022
  * */
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.entity.Chef;
 import java.util.Set;
 
-public interface IChefRepository extends IRepository <Chef, String>
+@Repository
+public interface IChefRepository extends JpaRepository<Chef, String>
 {
-    public Set<Chef> getAll();
+
 }
