@@ -4,8 +4,8 @@ import za.ac.cput.entity.Manager;
 import za.ac.cput.util.Helper;
 
 
-/* Staff.java
- Entity for the Staff
+/* ManagerFactory.java
+ Factory for the Manager
  Author: Velenkosini Prince Jeza (218191669)
  Date: 29 March 2022
 */

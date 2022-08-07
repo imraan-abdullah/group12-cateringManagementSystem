@@ -1,15 +1,26 @@
 package za.ac.cput.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 /*
 * Chef.java Entity for Chef
 * Author: Imraan Abdullah
 * 219361738
 * Date: 26 March 2022
 * */
+@Entity
 public class Entertainment
 {
+    @Id @NotNull
     private String entertainmentType;
     private int cost;
 
+    protected Entertainment()
+    {
+
+    }
     private Entertainment(Builder builder)
     {
         this.entertainmentType = builder.entertainmentType;

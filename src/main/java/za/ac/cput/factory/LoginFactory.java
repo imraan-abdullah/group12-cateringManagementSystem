@@ -1,8 +1,3 @@
-package za.ac.cput.factory;
-
-import za.ac.cput.entity.Login;
-
-
 /*
 LoginFactory.java
 Factory class for Login
@@ -10,22 +5,24 @@ Author: Ameer Samsodien (220005060)
 Date : 29 March 2022
 */
 
+package za.ac.cput.factory;
+
+import za.ac.cput.entity.Login;
+import za.ac.cput.util.Helper;
+
 public class LoginFactory {
 
-    public static Login createLogin(String loginId, String adminNum, String adminPassword){
-        if (loginId.equals("") || loginId == null)
-            return null;
+    public static Login createLogin(String adminNum, String adminPassword) {
 
-        if (adminNum.equals("") || adminNum == null)
-            return null;
+        String loginId = Helper.generateId();
 
-        if (adminPassword.equals("") || adminPassword == null)
-            return null;
-
-        return new Login.Builder().setLoginId(loginId)
+        Login login = new Login.Builder().setLoginId(loginId)
                 .setAdminNum(adminNum)
                 .setAdminPassword(adminPassword)
                 .build();
+        return login;
+
     }
 
 }
+

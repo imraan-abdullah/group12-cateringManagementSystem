@@ -12,7 +12,7 @@ import za.ac.cput.entity.Venue;
 public class VenueFactory {
 
     //Creating venue objects
-    public static Venue createVenue(int venueID, String buildingName, int numberOfSeats){
+    public static Venue createVenue(String venueID, String buildingName, int numberOfSeats){
         Venue venue = new Venue.Builder()
                 .setVenueID(venueID)
                 .setBuildingName(buildingName)

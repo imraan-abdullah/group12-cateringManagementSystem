@@ -7,7 +7,7 @@ package za.ac.cput.entity;
  * Date: 26 March 2022
  */
 public class Venue {
-    private int venueID;
+    private String venueID;
     private String buildingName;
     private int numberOfSeats;
 
@@ -19,7 +19,7 @@ public class Venue {
     }
 
     //Getters
-    public int getVenueID() {
+    public String getVenueID() {
         return venueID;
     }
 
@@ -42,12 +42,12 @@ public class Venue {
     }
 
     public static class Builder{
-        private int venueID;
+        private String venueID;
         private String buildingName;
         private int numberOfSeats;
 
         //Setters
-        public Builder setVenueID(int venueID) {
+        public Builder setVenueID(String venueID) {
             this.venueID = venueID;
             return this;
         }
