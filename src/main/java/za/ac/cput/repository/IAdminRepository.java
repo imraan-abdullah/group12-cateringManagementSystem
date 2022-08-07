@@ -8,9 +8,10 @@ Date : 6 April 2022
 
 package za.ac.cput.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import za.ac.cput.entity.Admin;
 import java.util.Set;
 
-public interface IAdminRepository extends IRepository <Admin, String>{
-    public Set<Admin> getAll();
+public interface IAdminRepository extends JpaRepository<Admin, String> {
+
 }
