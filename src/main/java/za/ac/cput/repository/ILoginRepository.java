@@ -8,9 +8,12 @@ Date : 6 April 2022
 
 package za.ac.cput.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.entity.Login;
 import java.util.Set;
 
-public interface ILoginRepository extends IRepository <Login, String>{
-    public Set<Login> getAll();
+@Repository
+public interface ILoginRepository extends JpaRepository<Login, String> {
+
 }

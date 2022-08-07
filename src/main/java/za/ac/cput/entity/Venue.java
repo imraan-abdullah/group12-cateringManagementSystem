@@ -5,17 +5,30 @@ package za.ac.cput.entity;
  * Entity for the Venue
  * Author: Thina Mzosindiso Nontwabaza (219189153)
  * Date: 26 March 2022
+ * Edited 05 August 2022
  */
-public class Venue {
-    private String venueID;
-    private String buildingName;
-    private int numberOfSeats;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
+public class Venue implements Serializable { //allows us to convert an Object to stream
+    @NotNull @Id private String venueID;
+    @NotNull private String buildingName;
+    @NotNull private int numberOfSeats;
 
     //Constructor
     private Venue(Builder builder){
         this.venueID = builder.venueID;
         this.buildingName = builder.buildingName;
         this.numberOfSeats = builder.numberOfSeats;
+    }
+
+    public Venue() {
+
     }
 
     //Getters
@@ -39,6 +52,23 @@ public class Venue {
                 ", buildingName='" + buildingName + '\'' +
                 ", numberOfSeats=" + numberOfSeats +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Venue venue = (Venue) o;
+        return numberOfSeats == venue.numberOfSeats &&
+                venueID.equals(venue.venueID) &&
+                buildingName.equals(venue.buildingName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(venueID, buildingName, numberOfSeats);
     }
 
     public static class Builder{

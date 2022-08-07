@@ -5,12 +5,21 @@ package za.ac.cput.entity;
  * Entity for the Inventory
  * Author: Thina Mzosindiso Nontwabaza (219189153)
  * Date: 26 March 2022.
+ * Edited 05 August 2022
  */
-public class Inventory {
-    private String itemID;
-    private String itemDescription;
-    private int itemQuantity;
-    private String stockAvailability;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Entity
+public class Inventory implements Serializable { //allows us to convert an Object to stream
+    @NotNull @Id private String itemID;
+    @NotNull private String itemDescription;
+    @NotNull private int itemQuantity;
+    @NotNull private String stockAvailability;
 
     //Constructor
     private Inventory(Builder builder) {
@@ -18,6 +27,10 @@ public class Inventory {
         this.itemDescription = builder.itemDescription;
         this.itemQuantity = builder.itemQuantity;
         this.stockAvailability = builder.stockAvailability;
+    }
+
+    public Inventory() {
+
     }
 
     //Getters
@@ -46,6 +59,24 @@ public class Inventory {
                 ", itemQuantity=" + itemQuantity +
                 ", stockAvailability='" + stockAvailability + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Inventory inventory = (Inventory) o;
+        return itemQuantity == inventory.itemQuantity &&
+                itemID.equals(inventory.itemID) &&
+                itemDescription.equals(inventory.itemDescription) &&
+                stockAvailability.equals(inventory.stockAvailability);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(itemID, itemDescription, itemQuantity, stockAvailability);
     }
 
     public static class Builder{

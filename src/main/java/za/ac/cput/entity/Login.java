@@ -7,13 +7,20 @@ Date : 27 March 2022
 
 package za.ac.cput.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class Login {
 
+    @Id
+    @NotNull
     private String loginId;
     private String adminNum;
     private String adminPassword;
 
-    private Login(){
+    protected Login(){
 
     }
 
