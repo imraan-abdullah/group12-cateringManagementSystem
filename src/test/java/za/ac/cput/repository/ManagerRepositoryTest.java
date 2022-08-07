@@ -1,10 +1,13 @@
+/*
 package za.ac.cput.repository;
 
+*/
 /* ManagerRepositoryTest.java
  Test for ManagerRepository
  Author: Velenkosini Prince Jeza (218191669)
  Date: 08 April 2022
-*/
+*//*
+
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -56,4 +59,4 @@ class ManagerRepositoryTest {
         assertTrue(success);
         System.out.println("Deleted: " + success);
     }
-}
+}*/
