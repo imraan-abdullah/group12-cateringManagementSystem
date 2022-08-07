@@ -5,28 +5,15 @@ package za.ac.cput.entity;
     Date: 26 March 2022
 */
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.Objects;
-
-@Entity
-public class Payment implements Serializable {
-    @NotNull @Id
+public class Payment {
     private String paymentNum;
-    @NotNull
     private String clientNum;
-    @NotNull
     private String amount;
-    @NotNull
     private String paymentType;
-    @NotNull
     private String date;
-    @NotNull
     private String venueId;
 
-    protected Payment() {}
+    private Payment() {}
 
     private Payment(Builder builder) {
         this.paymentNum = builder.paymentNum;
@@ -85,6 +72,18 @@ public class Payment implements Serializable {
         this.venueId = venueId;
     }
 
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "paymentNum='" + paymentNum + '\'' +
+                ", clientNum='" + clientNum + '\'' +
+                ", amount='" + amount + '\'' +
+                ", paymentType='" + paymentType + '\'' +
+                ", date='" + date + '\'' +
+                ", venueId='" + venueId + '\'' +
+                '}';
+    }
+
     public static class Builder {
         private String paymentNum;
         private String clientNum;
@@ -136,26 +135,5 @@ public class Payment implements Serializable {
         public Payment build() {
             return new Payment (this);
         }
-    }
-
-    @Override
-    public boolean equals (Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Payment payment = (Payment) o;
-        return paymentNum.equals(payment.paymentNum);
-    }
-    @Override
-    public int hashCode() {return Objects.hash(paymentNum);}
-    @Override
-    public String toString() {
-        return "Payment{" +
-                "paymentNum='" + paymentNum + '\'' +
-                ", clientNum='" + clientNum + '\'' +
-                ", amount='" + amount + '\'' +
-                ", paymentType='" + paymentType + '\'' +
-                ", date='" + date + '\'' +
-                ", venueId='" + venueId + '\'' +
-                '}';
     }
 }

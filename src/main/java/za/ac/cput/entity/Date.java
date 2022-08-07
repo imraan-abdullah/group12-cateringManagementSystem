@@ -5,24 +5,13 @@ package za.ac.cput.entity;
     Date: 26 March 2022
 */
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.Objects;
-
-@Entity
-public class Date implements Serializable {
-    @NotNull @Id
+public class Date {
     private String dateNum;
-    @NotNull
     private String venueAvailability;
-    @NotNull
     private String venueId;
-    @NotNull
     private String bookingNum;
 
-    protected Date() {}
+    private Date() {}
 
     private Date(Builder builder) {
         this.dateNum = builder.dateNum;
@@ -63,6 +52,16 @@ public class Date implements Serializable {
         this.bookingNum = bookingNum;
     }
 
+    @Override
+    public String toString() {
+        return "Date{" +
+                "dateNum='" + dateNum + '\'' +
+                ", venueAvailability='" + venueAvailability + '\'' +
+                ", venueId='" + venueId + '\'' +
+                ", bookingNum='" + bookingNum + '\'' +
+                '}';
+    }
+
     public static class Builder {
         private String dateNum;
         private String venueAvailability;
@@ -99,25 +98,5 @@ public class Date implements Serializable {
         public Date build() {
             return new Date(this);
         }
-    }
-    @Override
-    public boolean equals (Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Date date = (Date) o;
-        return dateNum.equals(date.dateNum);
-    }
-
-    @Override
-    public int hashCode() {return Objects.hash(dateNum);}
-
-    @Override
-    public String toString() {
-        return "Date{" +
-                "dateNum='" + dateNum + '\'' +
-                ", venueAvailability='" + venueAvailability + '\'' +
-                ", venueId='" + venueId + '\'' +
-                ", bookingNum='" + bookingNum + '\'' +
-                '}';
     }
 }
