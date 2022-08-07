@@ -1,20 +1,33 @@
 package za.ac.cput.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Objects;
+
 /*Client.java Entity for the Client
 Author: Mariam Gallie (219094837)
 Date: 26 March 2022
+Updated: 6 August 2022
 */
-
-public class Client {
+@Entity
+public class Client implements Serializable {
+    @NotNull
+    @Id
     private String clientNum;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
     private String email;
+    @NotNull
     private String phoneNum;
 
-    private Client(){}
+    protected Client(){}
 
-    private Client(Client.Builder builder) {
+    public Client(Builder builder) {
         this.clientNum = builder.clientNum;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
@@ -52,6 +65,20 @@ public class Client {
                 ", phoneNum='" + phoneNum + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return clientNum.equals(client.clientNum) && firstName.equals(client.firstName) && lastName.equals(client.lastName) && email.equals(client.email) && phoneNum.equals(client.phoneNum);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(clientNum, firstName, lastName, email, phoneNum);
+    }
+
     public static class Builder {
         private String clientNum;
         private String firstName;
