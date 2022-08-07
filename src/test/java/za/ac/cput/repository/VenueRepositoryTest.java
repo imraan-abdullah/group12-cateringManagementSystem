@@ -1,3 +1,4 @@
+/*
 package za.ac.cput.repository;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -5,12 +6,14 @@ import org.junit.jupiter.api.TestMethodOrder;
 import za.ac.cput.entity.Venue;
 import za.ac.cput.factory.VenueFactory;
 
+*/
 /*
  * Inventory.java
  * TDD, Repository
  * Author: Thina Mzosindiso Nontwabaza (219189153)
  * Date: 07 April 2022.
- */
+ *//*
+
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)
@@ -57,4 +60,4 @@ class VenueRepositoryTest {
         System.out.println(venueRepo.getAll());
         assertNotNull(venueRepo.getAll());
     }
-}
+}*/

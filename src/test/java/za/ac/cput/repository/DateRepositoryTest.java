@@ -1,10 +1,13 @@
+/*
 package za.ac.cput.repository;
 
+*/
 /*
  * DateRepositoryTest.java test class for DateRepository
  * Author: Shasta Abrahams 217059376
  * Date: 1 April 2022
- */
+ *//*
+
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -56,3 +59,4 @@ class DateRepositoryTest {
         System.out.println(repository.getAll());
     }
 }
+*/

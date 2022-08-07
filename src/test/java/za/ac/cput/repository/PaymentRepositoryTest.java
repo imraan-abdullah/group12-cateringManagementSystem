@@ -1,10 +1,13 @@
+/*
 package za.ac.cput.repository;
 
+*/
 /*
  * PaymentRepositoryTest.java test class for PaymentRepository
  * Author: Shasta Abrahams 217059376
  * Date: 1 April 2022
- */
+ *//*
+
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -58,3 +61,4 @@ class PaymentRepositoryTest {
         System.out.println(repository.getAll());
     }
 }
+*/
