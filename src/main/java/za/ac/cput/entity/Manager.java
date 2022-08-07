@@ -1,13 +1,18 @@
 package za.ac.cput.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 /* Manager.java
  Entity for the Manager
  Author: Velenkosini Prince Jeza (218191669)
  Date: 28 March 2022
 */
-
+@Entity
 public class Manager {
 
+    @NotNull @Id
     private String employeeId;
     private String firstName;
     private String lastName;
