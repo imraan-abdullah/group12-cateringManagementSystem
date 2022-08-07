@@ -12,13 +12,14 @@ updated: 6 August 2022
 */
 @Entity
 public class Booking implements Serializable {
-     @NotNull
-     @Id
+    @NotNull
+    @Id
     private String bookingNum;
     @NotNull
     private String clientNum;
-    private String date;
     @NotNull
+    private String date;
+
 
     protected Booking() {
     }
