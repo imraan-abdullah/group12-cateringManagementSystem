@@ -1,13 +1,20 @@
 package za.ac.cput.entity;
 
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 /* Staff.java
  Entity for the Staff
  Author: Velenkosini Prince Jeza (218191669)
  Date: 28 March 2022
 */
-
+@Entity
 public class Staff {
 
+    @NotNull @Id
     private String employeeId;
     private String firstName;
     private String lastName;
