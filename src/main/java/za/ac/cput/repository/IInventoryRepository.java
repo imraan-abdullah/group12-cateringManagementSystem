@@ -8,7 +8,7 @@ import za.ac.cput.entity.Inventory;
  * Interface
  * Author: Thina Mzosindiso Nontwabaza (219189153)
  * Date: 04 April 2022.
- * Edited 05 August 2022
+ * Edited 06 August 2022
  */
 
 import java.util.Set;
