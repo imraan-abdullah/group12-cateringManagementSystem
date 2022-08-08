@@ -6,14 +6,20 @@ package za.ac.cput.entity;
  Date: 28 March 2022
 */
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class Staff {
 
+    @Id @NotNull
     private String employeeId;
     private String firstName;
     private String lastName;
     private String staffType;
 
-    public Staff() {
+    protected Staff() {
     }
 
     private Staff(Staff.Builder builder){
