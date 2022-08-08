@@ -6,9 +6,11 @@ package za.ac.cput.repository;
  * Date: 1 April 2022
  */
 
+import org.springframework.stereotype.Repository;
 import za.ac.cput.entity.Date;
 import java.util.Set;
 
+@Repository
 public interface IDateRepository extends IRepository<Date, String> {
-    public Set<Date> getAll();
+
 }
