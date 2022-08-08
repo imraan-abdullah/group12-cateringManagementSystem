@@ -1,5 +1,6 @@
 package za.ac.cput.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import za.ac.cput.entity.Venue;
 
 /*
@@ -12,6 +13,7 @@ import za.ac.cput.entity.Venue;
 
 import java.util.Set;
 
+@Repository
 public interface IVenueRepository extends JpaRepository<Venue, String> {
     //public Set <Venue> getAll();
 

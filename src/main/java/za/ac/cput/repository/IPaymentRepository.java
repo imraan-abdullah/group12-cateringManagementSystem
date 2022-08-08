@@ -6,12 +6,13 @@ package za.ac.cput.repository;
  * Date: 1 April 2022
  */
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import za.ac.cput.entity.Payment;
 
 import java.util.Set;
 
 @Repository
-public interface IPaymentRepository extends IRepository<Payment, String>{
+public interface IPaymentRepository extends JpaRepository<Payment, String> {
     
 }
