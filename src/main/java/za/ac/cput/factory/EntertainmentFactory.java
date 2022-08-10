@@ -10,20 +10,18 @@ package za.ac.cput.factory;
 import za.ac.cput.entity.Chef;
 import za.ac.cput.entity.Entertainment;
 import za.ac.cput.util.Helper;
+import za.ac.cput.util.StringHelper;
 
 public class EntertainmentFactory
 {
     public static Entertainment createEntertainment(String entertainmentType, int cost)
     {
-        if(Helper.isNullOrEmpty(entertainmentType))
-            return null;
 
-        if(Helper.isNullOrNegitive(cost))
-            return null;
+        StringHelper.checkStringParam("entertainmentType", entertainmentType);
+        StringHelper.isNullOrNegative(cost);
 
-        Entertainment entertainment = new Entertainment.Builder().setEntertainmentType(entertainmentType)
+        return new Entertainment.Builder().setEntertainmentType(entertainmentType)
                 .setCost(cost)
                 .build();
-        return entertainment;
     }
 }

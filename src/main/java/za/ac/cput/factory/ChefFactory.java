@@ -9,20 +9,21 @@ package za.ac.cput.factory;
 
 import za.ac.cput.entity.Chef;
 import za.ac.cput.util.Helper;
+import za.ac.cput.util.StringHelper;
 
 public class ChefFactory
 {
-    public static Chef createChef(String firstName, String lastName)
+    public static Chef createChef(String chefId ,String firstName, String lastName)
     {
-        String employeeId = Helper.generateId();
+        StringHelper.checkStringParam("chefId", chefId);
+        StringHelper.checkStringParam("firstName", firstName);
+        StringHelper.checkStringParam("lastName", lastName);
+        StringHelper.isEmptyOrNull(firstName);
+        StringHelper.isEmptyOrNull(lastName);
 
-        if(Helper.isNullOrEmpty(firstName) || Helper.isNullOrEmpty(lastName))
-            return null;
-
-        Chef chef = new Chef.Builder().setEmployeeId(employeeId)
+        return new Chef.Builder().setEmployeeId(chefId)
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .build();
-        return chef;
     }
 }

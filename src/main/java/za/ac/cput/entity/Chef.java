@@ -3,6 +3,7 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /*
  * Chef.java Entity for Chef
@@ -15,7 +16,9 @@ public class Chef
 {
     @NotNull @Id
     private String employeeId;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
 
     protected Chef()
@@ -35,38 +38,14 @@ public class Chef
         return employeeId;
     }
 
-    public void setEmployeeId(String employeeId)
-    {
-        this.employeeId = employeeId;
-    }
-
     public String getFirstName()
     {
         return firstName;
     }
 
-    public void setFirstName(String firstName)
-    {
-        this.firstName = firstName;
-    }
-
     public String getLastName()
     {
         return lastName;
-    }
-
-    public void setLastName(String lastName)
-    {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "Chef{" +
-                "employeeId='" + employeeId + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
     }
 
     public static class Builder
@@ -106,5 +85,28 @@ public class Chef
             return new Chef(this);
         }
 
+        @Override
+        public boolean equals(Object o)
+        {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Builder builder = (Builder) o;
+            return employeeId.equals(builder.employeeId) && firstName.equals(builder.firstName) && lastName.equals(builder.lastName);
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return Objects.hash(employeeId, firstName, lastName);
+        }
+
+        @Override
+        public String toString() {
+            return "Builder{" +
+                    "employeeId='" + employeeId + '\'' +
+                    ", firstName='" + firstName + '\'' +
+                    ", lastName='" + lastName + '\'' +
+                    '}';
+        }
     }
 }
