@@ -3,6 +3,7 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /*
 * Chef.java Entity for Chef
@@ -15,6 +16,7 @@ public class Entertainment
 {
     @Id @NotNull
     private String entertainmentType;
+    @NotNull
     private int cost;
 
     protected Entertainment()
@@ -32,27 +34,9 @@ public class Entertainment
         return entertainmentType;
     }
 
-    public void setEntertainmentType(String entertainmentType)
-    {
-        this.entertainmentType = entertainmentType;
-    }
-
     public int getCost()
     {
         return cost;
-    }
-
-    public void setCost(int cost)
-    {
-        this.cost = cost;
-    }
-
-    @Override
-    public String toString() {
-        return "Entertainment{" +
-                "entertainmentType='" + entertainmentType + '\'' +
-                ", cost=" + cost +
-                '}';
     }
 
     public static class Builder
@@ -83,5 +67,26 @@ public class Entertainment
         {
             return new Entertainment(this);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entertainment that = (Entertainment) o;
+        return cost == that.cost && entertainmentType.equals(that.entertainmentType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(entertainmentType, cost);
+    }
+
+    @Override
+    public String toString() {
+        return "Entertainment{" +
+                "entertainmentType='" + entertainmentType + '\'' +
+                ", cost=" + cost +
+                '}';
     }
 }

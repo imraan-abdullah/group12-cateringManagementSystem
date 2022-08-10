@@ -3,6 +3,7 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /*
  * Chef.java Entity for Chef
@@ -15,7 +16,9 @@ public class WaitingStaff
 {
     @Id @NotNull
     private String employeeId;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
 
     protected WaitingStaff()
@@ -30,14 +33,9 @@ public class WaitingStaff
         this.lastName = builder.lastName;
     }
 
-    public String getEmployeeId()
+    public String getId()
     {
         return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId)
-    {
-        this.employeeId = employeeId;
     }
 
     public String getFirstName()
@@ -45,28 +43,9 @@ public class WaitingStaff
         return firstName;
     }
 
-    public void setFirstName(String firstName)
-    {
-        this.firstName = firstName;
-    }
-
     public String getLastName()
     {
         return lastName;
-    }
-
-    public void setLastName(String lastName)
-    {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "WaitingStaff{" +
-                "employeeId='" + employeeId + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
     }
 
     public static class Builder
@@ -75,7 +54,7 @@ public class WaitingStaff
         private String firstName;
         private String lastName;
 
-        public Builder setEmployeeId(String employeeId)
+        public Builder setId(String employeeId)
         {
             this.employeeId = employeeId;
             return this;
@@ -104,6 +83,28 @@ public class WaitingStaff
         public WaitingStaff build()
         {
             return new WaitingStaff(this);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Builder builder = (Builder) o;
+            return employeeId.equals(builder.employeeId) && firstName.equals(builder.firstName) && lastName.equals(builder.lastName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(employeeId, firstName, lastName);
+        }
+
+        @Override
+        public String toString() {
+            return "Builder{" +
+                    "employeeId='" + employeeId + '\'' +
+                    ", firstName='" + firstName + '\'' +
+                    ", lastName='" + lastName + '\'' +
+                    '}';
         }
     }
 }

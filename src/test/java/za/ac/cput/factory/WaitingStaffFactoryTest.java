@@ -17,7 +17,7 @@ class WaitingStaffFactoryTest {
     @Test
     public void createWaitingStaff()
     {
-        WaitingStaff waitingStaff = WaitingStaffFactory.createWaitingStaff("Tasneem", "Upadhe");
+        WaitingStaff waitingStaff = WaitingStaffFactory.createWaitingStaff("0125", "Tasneem", "Upadhe");
         System.out.println(waitingStaff.toString());
         assertNotNull(waitingStaff);
     }
