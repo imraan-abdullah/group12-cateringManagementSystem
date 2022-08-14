@@ -100,16 +100,17 @@ public class Date implements Serializable {
             return new Date(this);
         }
     }
+
     @Override
     public boolean equals (Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Date date = (Date) o;
-        return dateNum.equals(date.dateNum);
+        return dateNum.equals(date.dateNum) && venueAvailability.equals(date.venueAvailability) && venueId.equals(date.venueId) && bookingNum.equals(date.bookingNum);
     }
 
     @Override
-    public int hashCode() {return Objects.hash(dateNum);}
+    public int hashCode() {return Objects.hash(dateNum, venueAvailability, venueId, bookingNum);}
 
     @Override
     public String toString() {
@@ -120,4 +121,5 @@ public class Date implements Serializable {
                 ", bookingNum='" + bookingNum + '\'' +
                 '}';
     }
+
 }
