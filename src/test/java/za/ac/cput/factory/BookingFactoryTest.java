@@ -21,7 +21,7 @@ class BookingFactoryTest {
     assertNotNull(booking);
 }
     @Test
-    public void buidWithError(){
+    public void buildWithError(){
         Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> BookingFactory.build("", "",""));
         System.out.println(exception.getMessage());
