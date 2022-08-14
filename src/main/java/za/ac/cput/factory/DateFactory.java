@@ -12,8 +12,8 @@ import za.ac.cput.util.StringHelper;
 
 public class DateFactory {
     public static Date build(String dateNum, String venueAvailability, String venueId, String bookingNum) {
-        String dateId = Helper.generateId();
-        Date date = new Date.Builder().setDateNum(dateId)
+        //String dateId = Helper.generateId();
+        Date date = new Date.Builder().setDateNum(dateNum)
                 .setVenueAvailability(venueAvailability)
                 .setVenueId(venueId)
                 .setBookingNum(bookingNum)

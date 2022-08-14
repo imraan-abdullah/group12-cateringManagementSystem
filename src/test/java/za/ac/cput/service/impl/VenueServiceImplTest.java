@@ -45,7 +45,7 @@ class VenueServiceImplTest {
         Optional<Venue> venueOptional = this.iVenueService.read(this.venue.getVenueID());
         assertAll(
                 () -> assertTrue(venueOptional.isPresent()),
-                () -> assertEquals(this.iVenueService, venueOptional.get())
+                () -> assertEquals(this.venue, venueOptional.get())
         );
     }
 

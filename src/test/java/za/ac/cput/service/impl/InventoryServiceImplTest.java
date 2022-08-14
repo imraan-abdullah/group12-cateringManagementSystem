@@ -44,7 +44,7 @@ class InventoryServiceImplTest {
         Optional<Inventory> read = this.iInventoryService.read(this.inventory.getItemID());
         assertAll(
                 () -> assertTrue(read.isPresent()),
-                () -> assertEquals(this.iInventoryService, read.get())
+                () -> assertEquals(this.inventory, read.get())
         );
     }
 
