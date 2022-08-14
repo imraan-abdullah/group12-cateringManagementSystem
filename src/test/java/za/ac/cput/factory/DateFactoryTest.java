@@ -6,6 +6,7 @@ package za.ac.cput.factory;
 */
 
 import org.junit.jupiter.api.Test;
+import za.ac.cput.entity.Client;
 import za.ac.cput.entity.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,6 +18,7 @@ class DateFactoryTest {
     //    Date date = DateFactory.createDate("Available", "56567", "90909");
     //    assertNotNull(date);
     //}
+
 
     @Test
     public void buildWithSuccess() {
