@@ -1,8 +1,11 @@
 package za.ac.cput.service.impl;
 
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.entity.Date;
 import za.ac.cput.entity.Payment;
 import za.ac.cput.factory.PaymentFactory;
@@ -12,6 +15,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 class PaymentServiceImplTest {
     private final Payment payment = PaymentFactory.build("4563556", "3456353", "R590", "Card", "22-10-2019", "54352");

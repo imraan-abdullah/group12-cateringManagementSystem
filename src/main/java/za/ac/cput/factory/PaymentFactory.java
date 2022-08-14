@@ -12,8 +12,8 @@ import za.ac.cput.util.Helper;
 
 public class PaymentFactory {
     public static Payment build(String paymentNum, String clientNum, String amount, String paymentType, String date, String venueId) {
-        String paymentId = Helper.generateId();
-        Payment payment = new Payment.Builder().setPaymentNum(paymentId)
+        //String paymentId = Helper.generateId();
+        Payment payment = new Payment.Builder().setPaymentNum(paymentNum)
                 .setClientNum(clientNum)
                 .setAmount(amount)
                 .setPaymentType(paymentType)
