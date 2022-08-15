@@ -15,19 +15,13 @@ import java.util.Objects;
 @Entity
 public class Chef implements Serializable
 {
-    @NotNull @Id
-    private String employeeId;
-    @NotNull
-    private String firstName;
-    @NotNull
-    private String lastName;
+    @NotNull @Id private String employeeId;
+    @NotNull private String firstName;
+    @NotNull private String lastName;
 
-    public Chef()
-    {
+    protected Chef() {}
 
-    }
-
-    private Chef(Builder builder)
+    public Chef(Builder builder)
     {
         this.employeeId = builder.employeeId;
         this.firstName = builder.firstName;
