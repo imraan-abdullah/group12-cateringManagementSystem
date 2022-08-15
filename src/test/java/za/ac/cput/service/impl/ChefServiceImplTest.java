@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ChefServiceImplTest
 {
-    private final Chef chef = ChefFactory.createChef("0124","Imraan", "Abdullah");
+    private final Chef chef = ChefFactory.build("0124","Imraan", "Abdullah");
 
     @Autowired
     private IChefService service;
