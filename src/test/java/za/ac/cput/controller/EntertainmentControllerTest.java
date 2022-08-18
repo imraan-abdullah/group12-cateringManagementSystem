@@ -1,5 +1,12 @@
 package za.ac.cput.controller;
 
+/*
+ * EntertainmentControllerTest.java Controller Test for Entertainment
+ * Author: Imraan Abdullah
+ * 219361738
+ * Date: 18 August 2022
+ * */
+
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

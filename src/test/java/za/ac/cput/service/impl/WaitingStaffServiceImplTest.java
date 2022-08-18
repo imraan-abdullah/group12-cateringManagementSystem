@@ -1,5 +1,12 @@
 package za.ac.cput.service.impl;
 
+/*
+ * WaitingStaffServiceImplTest.java Service Test for WaitingStaff
+ * Author: Imraan Abdullah
+ * 219361738
+ * Date: 10 August 2022
+ * */
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

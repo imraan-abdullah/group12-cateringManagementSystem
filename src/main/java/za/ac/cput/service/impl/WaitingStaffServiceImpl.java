@@ -1,5 +1,12 @@
 package za.ac.cput.service.impl;
 
+/*
+ * WaitingStaffService.java Service for WaitingStaff
+ * Author: Imraan Abdullah
+ * 219361738
+ * Date: 10 August 2022
+ * */
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.entity.Chef;

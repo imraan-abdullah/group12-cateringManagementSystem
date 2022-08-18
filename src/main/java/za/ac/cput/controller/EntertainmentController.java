@@ -1,5 +1,12 @@
 package za.ac.cput.controller;
 
+/*
+ * EntertainmentController.java Controller for Entertainment
+ * Author: Imraan Abdullah
+ * 219361738
+ * Date: 18 August 2022
+ * */
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
