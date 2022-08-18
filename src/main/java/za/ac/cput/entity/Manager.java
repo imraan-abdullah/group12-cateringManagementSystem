@@ -3,6 +3,7 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /* Manager.java
  Entity for the Manager
@@ -12,10 +13,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Manager {
 
-    @Id @NotNull
-    private String employeeId;
-    private String firstName;
-    private String lastName;
+    @Id @NotNull private String employeeId;
+    @NotNull private String firstName;
+    @NotNull private String lastName;
 
     protected Manager() {
     }
@@ -94,5 +94,18 @@ public class Manager {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Manager manager = (Manager) o;
+        return employeeId.equals(manager.employeeId) && firstName.equals(manager.firstName) && lastName.equals(manager.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeId, firstName, lastName);
     }
 }

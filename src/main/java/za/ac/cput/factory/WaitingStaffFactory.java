@@ -8,20 +8,21 @@ package za.ac.cput.factory;
  * */
 
 import za.ac.cput.entity.WaitingStaff;
-import za.ac.cput.util.Helper;
 import za.ac.cput.util.StringHelper;
 
 public class WaitingStaffFactory
 {
-    public static WaitingStaff createWaitingStaff(String WaitingStaffId,String firstName, String lastName)
+    public static WaitingStaff build(String WaitingStaffId, String firstName, String lastName)
     {
-        StringHelper.checkStringParam(" WaitingStaffId",  WaitingStaffId);
+        StringHelper.checkStringParam("waitingStaffId", WaitingStaffId);
         StringHelper.checkStringParam("firstName", firstName);
         StringHelper.checkStringParam("lastName", lastName);
         StringHelper.isEmptyOrNull(firstName);
         StringHelper.isEmptyOrNull(lastName);
+        StringHelper.checkId(WaitingStaffId);
 
-        return new WaitingStaff.Builder().setId(WaitingStaffId)
+        return new WaitingStaff.Builder()
+                .setEmployeeId(WaitingStaffId)
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .build();

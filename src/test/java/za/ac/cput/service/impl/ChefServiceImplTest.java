@@ -1,5 +1,12 @@
 package za.ac.cput.service.impl;
 
+/*
+ * ChefServiceImplTest.java Service Test for Chef
+ * Author: Imraan Abdullah
+ * 219361738
+ * Date: 10 August 2022
+ * */
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -30,8 +37,8 @@ class ChefServiceImplTest
     void save() {
         Chef saved = this.service.save(this.chef);
         assertAll(
-                () -> assertNotNull(saved)
-                //()->assertEquals(this.chef,saved)
+                () -> assertNotNull(saved),
+                () -> assertEquals(this.chef,saved)
         );
     }
 

@@ -53,17 +53,15 @@ public class Chef implements Serializable
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Builder builder = (Builder) o;
-        return employeeId.equals(builder.employeeId) && firstName.equals(builder.firstName) && lastName.equals(builder.lastName);
+        Chef chef = (Chef) o;
+        return Objects.equals(employeeId, chef.employeeId) && Objects.equals(firstName, chef.firstName) && Objects.equals(lastName, chef.lastName);
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return Objects.hash(employeeId, firstName, lastName);
     }
 

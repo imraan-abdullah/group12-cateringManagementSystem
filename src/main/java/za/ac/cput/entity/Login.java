@@ -10,15 +10,15 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 public class Login {
 
-    @Id
-    @NotNull
-    private String loginId;
-    private String adminNum;
-    private String adminPassword;
+    @Id @NotNull
+    @NotNull private String loginId;
+    @NotNull private String adminNum;
+    @NotNull private String adminPassword;
 
     protected Login(){
 
@@ -48,6 +48,19 @@ public class Login {
                 ", adminNum='" + adminNum + '\'' +
                 ", adminPassword='" + adminPassword + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Login login = (Login) o;
+        return loginId.equals(login.loginId) && adminNum.equals(login.adminNum) && adminPassword.equals(login.adminPassword);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(loginId, adminNum, adminPassword);
     }
 
     public static class Builder{
