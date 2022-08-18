@@ -14,7 +14,7 @@ import za.ac.cput.util.StringHelper;
 
 public class EntertainmentFactory
 {
-    public static Entertainment createEntertainment(String entertainmentType, int cost)
+    public static Entertainment build(String entertainmentType, int cost)
     {
 
         StringHelper.checkStringParam("entertainmentType", entertainmentType);

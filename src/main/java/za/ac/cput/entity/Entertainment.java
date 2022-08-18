@@ -3,6 +3,7 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
 /*
@@ -12,12 +13,10 @@ import java.util.Objects;
 * Date: 26 March 2022
 * */
 @Entity
-public class Entertainment
+public class Entertainment implements Serializable
 {
-    @Id @NotNull
-    private String entertainmentType;
-    @NotNull
-    private int cost;
+    @Id @NotNull private String entertainmentType;
+    @NotNull private int cost;
 
     protected Entertainment()
     {

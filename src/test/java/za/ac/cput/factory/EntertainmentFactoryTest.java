@@ -17,7 +17,7 @@ class EntertainmentFactoryTest {
     @Test
     public void createEntertainment()
     {
-        Entertainment entertainment = EntertainmentFactory.createEntertainment("Music", 5000);
+        Entertainment entertainment = EntertainmentFactory.build("Music", 5000);
         System.out.println(entertainment.toString());
         assertNotNull(entertainment);
     }

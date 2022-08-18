@@ -9,15 +9,15 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 public class Staff {
 
-    @Id @NotNull
-    private String employeeId;
-    private String firstName;
-    private String lastName;
-    private String staffType;
+    @Id @NotNull private String employeeId;
+    @NotNull private String firstName;
+    @NotNull private String lastName;
+    @NotNull private String staffType;
 
     protected Staff() {
     }
@@ -111,5 +111,18 @@ public class Staff {
                 ", lastName='" + lastName + '\'' +
                 ", staffType='" + staffType + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Staff staff = (Staff) o;
+        return employeeId.equals(staff.employeeId) && firstName.equals(staff.firstName) && lastName.equals(staff.lastName) && staffType.equals(staff.staffType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeId, firstName, lastName, staffType);
     }
 }

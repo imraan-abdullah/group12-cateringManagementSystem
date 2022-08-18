@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LoginServiceImplTest {
 
-    private final Login login = LoginFactory.createLogin("1", "password");
+    private final Login login = LoginFactory.createLogin("0001","1", "password");
 
     @Autowired
     private ILoginService service;
@@ -45,6 +45,7 @@ class LoginServiceImplTest {
     @Test
     void read() {
         Optional<Login> read = this.service.read(this.login.getLoginId());
+        System.out.println("print");
         System.out.println(read);
         assertAll(
                 () -> assertTrue(read.isPresent()),

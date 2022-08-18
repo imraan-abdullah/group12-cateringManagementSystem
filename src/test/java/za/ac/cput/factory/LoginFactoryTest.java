@@ -16,7 +16,7 @@ class LoginFactoryTest {
 
     @Test
     void createLogin() {
-        Login login = LoginFactory.createLogin("admin2022", "123password");
+        Login login = LoginFactory.createLogin("0001","admin2022", "123password");
         assertNotNull(login);
         System.out.println(login);
     }

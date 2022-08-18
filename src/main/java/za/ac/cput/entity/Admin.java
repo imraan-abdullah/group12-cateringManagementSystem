@@ -11,17 +11,16 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 public class Admin {
 
-    @Id
-    @NotNull
-    private String adminNum;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNum;
+    @Id @NotNull private String adminNum;
+    @NotNull private String firstName;
+    @NotNull private String lastName;
+    @NotNull private String email;
+    @NotNull private String phoneNum;
 
     protected Admin(){
 
@@ -50,6 +49,19 @@ public class Admin {
                 ", email='" + email + '\'' +
                 ", phoneNum='" + phoneNum + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Admin admin = (Admin) o;
+        return adminNum.equals(admin.adminNum) && firstName.equals(admin.firstName) && lastName.equals(admin.lastName) && email.equals(admin.email) && phoneNum.equals(admin.phoneNum);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(adminNum, firstName, lastName, email, phoneNum);
     }
 
     public static class Builder{

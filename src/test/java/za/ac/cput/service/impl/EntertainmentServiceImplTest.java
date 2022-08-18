@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.entity.Chef;
 import za.ac.cput.entity.Entertainment;
 import za.ac.cput.factory.EntertainmentFactory;
 import za.ac.cput.service.IEntertainmentService;
@@ -21,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EntertainmentServiceImplTest
 {
-    private final Entertainment entertainment = EntertainmentFactory.createEntertainment("0126", 5000);
+    private final Entertainment entertainment = EntertainmentFactory.build("0126", 5000);
 
     @Autowired
     private IEntertainmentService service;

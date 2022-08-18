@@ -30,8 +30,8 @@ class ChefServiceImplTest
     void save() {
         Chef saved = this.service.save(this.chef);
         assertAll(
-                () -> assertNotNull(saved)
-                //()->assertEquals(this.chef,saved)
+                () -> assertNotNull(saved),
+                () -> assertEquals(this.chef,saved)
         );
     }
 
