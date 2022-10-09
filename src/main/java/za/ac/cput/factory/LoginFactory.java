@@ -12,9 +12,9 @@ import za.ac.cput.util.Helper;
 
 public class LoginFactory {
 
-    public static Login createLogin(String adminNum, String adminPassword) {
+    public static Login createLogin(String loginId, String adminNum, String adminPassword) {
 
-        String loginId = Helper.generateId();
+        //String loginId = Helper.generateId();
 
         Login login = new Login.Builder().setLoginId(loginId)
                 .setAdminNum(adminNum)

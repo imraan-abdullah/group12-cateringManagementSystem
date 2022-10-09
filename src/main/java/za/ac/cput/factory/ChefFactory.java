@@ -8,20 +8,21 @@ package za.ac.cput.factory;
  * */
 
 import za.ac.cput.entity.Chef;
-import za.ac.cput.util.Helper;
 import za.ac.cput.util.StringHelper;
 
 public class ChefFactory
 {
-    public static Chef createChef(String chefId ,String firstName, String lastName)
+    public static Chef build(String chefId , String firstName, String lastName)
     {
         StringHelper.checkStringParam("chefId", chefId);
         StringHelper.checkStringParam("firstName", firstName);
         StringHelper.checkStringParam("lastName", lastName);
         StringHelper.isEmptyOrNull(firstName);
         StringHelper.isEmptyOrNull(lastName);
+        StringHelper.checkId(chefId);
 
-        return new Chef.Builder().setEmployeeId(chefId)
+        return new Chef.Builder()
+                .setEmployeeId(chefId)
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .build();

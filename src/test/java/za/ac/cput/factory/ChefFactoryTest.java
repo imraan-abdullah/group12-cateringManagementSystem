@@ -17,7 +17,7 @@ class ChefFactoryTest {
     @Test
     public void createChef()
     {
-        Chef chef = ChefFactory.createChef("0124", "imraan", "Abdullah");
+        Chef chef = ChefFactory.build("0124", "imraan", "Abdullah");
         System.out.println(chef.toString());
         assertNotNull(chef);
     }

@@ -3,6 +3,7 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
 /*
@@ -12,21 +13,15 @@ import java.util.Objects;
  * Date: 26 March 2022
  * */
 @Entity
-public class Chef
+public class Chef implements Serializable
 {
-    @NotNull @Id
-    private String employeeId;
-    @NotNull
-    private String firstName;
-    @NotNull
-    private String lastName;
+    @NotNull @Id private String employeeId;
+    @NotNull private String firstName;
+    @NotNull private String lastName;
 
-    protected Chef()
-    {
+    protected Chef() {}
 
-    }
-
-    private Chef(Builder builder)
+    public Chef(Builder builder)
     {
         this.employeeId = builder.employeeId;
         this.firstName = builder.firstName;
@@ -46,6 +41,28 @@ public class Chef
     public String getLastName()
     {
         return lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Builder{" +
+                "employeeId='" + employeeId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Chef chef = (Chef) o;
+        return Objects.equals(employeeId, chef.employeeId) && Objects.equals(firstName, chef.firstName) && Objects.equals(lastName, chef.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(employeeId, firstName, lastName);
     }
 
     public static class Builder
@@ -83,30 +100,6 @@ public class Chef
         public Chef build()
         {
             return new Chef(this);
-        }
-
-        @Override
-        public boolean equals(Object o)
-        {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Builder builder = (Builder) o;
-            return employeeId.equals(builder.employeeId) && firstName.equals(builder.firstName) && lastName.equals(builder.lastName);
-        }
-
-        @Override
-        public int hashCode()
-        {
-            return Objects.hash(employeeId, firstName, lastName);
-        }
-
-        @Override
-        public String toString() {
-            return "Builder{" +
-                    "employeeId='" + employeeId + '\'' +
-                    ", firstName='" + firstName + '\'' +
-                    ", lastName='" + lastName + '\'' +
-                    '}';
         }
     }
 }

@@ -1,5 +1,12 @@
 package za.ac.cput.service.impl;
 
+/*
+ * ChefServiceImplTest.java Service Test for Chef
+ * Author: Imraan Abdullah
+ * 219361738
+ * Date: 10 August 2022
+ * */
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -20,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ChefServiceImplTest
 {
-    private final Chef chef = ChefFactory.createChef("0124","Imraan", "Abdullah");
+    private final Chef chef = ChefFactory.build("0124","Imraan", "Abdullah");
 
     @Autowired
     private IChefService service;
@@ -30,7 +37,8 @@ class ChefServiceImplTest
     void save() {
         Chef saved = this.service.save(this.chef);
         assertAll(
-                () -> assertNotNull(saved)
+                () -> assertNotNull(saved),
+                () -> assertEquals(this.chef,saved)
         );
     }
 
@@ -41,6 +49,7 @@ class ChefServiceImplTest
         System.out.println(read);
         assertAll(
                 () -> assertTrue(read.isPresent())
+                //()->assertEquals(this.chef,read.get())
         );
     }
 

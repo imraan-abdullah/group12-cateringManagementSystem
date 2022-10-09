@@ -1,16 +1,20 @@
 package za.ac.cput.service.impl;
 
+/*
+ * WaitingStaffServiceImplTest.java Service Test for WaitingStaff
+ * Author: Imraan Abdullah
+ * 219361738
+ * Date: 10 August 2022
+ * */
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.entity.Chef;
 import za.ac.cput.entity.WaitingStaff;
-import za.ac.cput.factory.ChefFactory;
 import za.ac.cput.factory.WaitingStaffFactory;
-import za.ac.cput.service.IChefService;
 import za.ac.cput.service.IWaitingStaffService;
 
 import java.util.List;
@@ -23,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class WaitingStaffServiceImplTest
 {
 
-    private final WaitingStaff waitingStaff = WaitingStaffFactory.createWaitingStaff("0125","Imraan", "Abdullah");
+    private final WaitingStaff waitingStaff = WaitingStaffFactory.build("0125","Imraan", "Abdullah");
 
     @Autowired
     private IWaitingStaffService service;
@@ -41,7 +45,7 @@ class WaitingStaffServiceImplTest
     @Test
     @Order(2)
     void read() {
-        Optional<WaitingStaff> read = this.service.read(this.waitingStaff.getId());
+        Optional<WaitingStaff> read = this.service.read(this.waitingStaff.getEmployeeId());
         System.out.println(read);
         assertAll(
                 () -> assertTrue(read.isPresent())
@@ -58,7 +62,7 @@ class WaitingStaffServiceImplTest
     @Order(4)
     @Test
     void delete() {
-        this.service.deleteById(this.waitingStaff.getId());
+        this.service.deleteById(this.waitingStaff.getEmployeeId());
         List<WaitingStaff> waitingStaffList = this.service.findAll();
         assertEquals(0, waitingStaffList.size());
     }

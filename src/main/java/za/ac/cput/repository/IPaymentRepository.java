@@ -14,5 +14,5 @@ import java.util.Set;
 
 @Repository
 public interface IPaymentRepository extends JpaRepository<Payment, String> {
-    
+
 }
