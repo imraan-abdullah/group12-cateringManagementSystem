@@ -13,9 +13,11 @@ import java.util.Optional;
 public class DateServiceImpl implements IDateService {
     private final IDateRepository repository;
 
-    @Autowired public DateServiceImpl (IDateRepository repository) {
+    @Autowired
+    public DateServiceImpl (IDateRepository repository) {
         this.repository = repository;
     }
+
     @Override
     public Date save (Date date) {
         return this.repository.save(date);
