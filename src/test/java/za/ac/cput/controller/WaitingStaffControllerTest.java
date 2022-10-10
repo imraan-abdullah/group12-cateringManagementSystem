@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import za.ac.cput.entity.Chef;
 import za.ac.cput.entity.WaitingStaff;
 import za.ac.cput.factory.WaitingStaffFactory;
 
@@ -22,7 +22,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
-class WaitingStaffControllerTest {
+class WaitingStaffControllerTest
+{
+    public static String ADMIN_SECURITY_USERNAME = "waitingStaff-admin";
+    public static String ADMIN_SECURITY_PASSWORD = "12345";
+    public static String CLIENT_SECURITY_USERNAME = "waitingStaff-client";
+    public static String CLIENT_SECURITY_PASSWORD = "54321";
 
     @LocalServerPort
     private int port;
@@ -46,8 +51,13 @@ class WaitingStaffControllerTest {
     void safe()
     {
         String url = baseUrl + "save";
-        ResponseEntity<WaitingStaff> response = this.restTemplate.postForEntity(url, this.waitingStaff, WaitingStaff.class);
-        System.out.println(response);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<WaitingStaff> entity = new HttpEntity<WaitingStaff>(waitingStaff, headers);
+        ResponseEntity<WaitingStaff> response = restTemplate
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.POST, entity, WaitingStaff.class);
+
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertNotNull(response.getBody())
@@ -59,7 +69,13 @@ class WaitingStaffControllerTest {
     void read()
     {
         String url = baseUrl + "read/" + this.waitingStaff.getEmployeeId();
-        ResponseEntity<WaitingStaff> response = this.restTemplate.getForEntity(url, WaitingStaff.class);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<WaitingStaff> response = restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, WaitingStaff.class);
+
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertNotNull(response.getBody())
@@ -71,7 +87,14 @@ class WaitingStaffControllerTest {
     void delete()
     {
         String url = baseUrl + "delete/"+ this.waitingStaff.getEmployeeId();
-        this.restTemplate.delete(url);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<WaitingStaff> response = restTemplate
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.DELETE, entity, WaitingStaff.class);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
     @Test
@@ -79,11 +102,16 @@ class WaitingStaffControllerTest {
     void findAll()
     {
         String url = baseUrl + "all";
-        ResponseEntity<WaitingStaff[]> response = this.restTemplate.getForEntity(url, WaitingStaff[].class);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        ResponseEntity<String> response = restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, String.class);
+        System.out.println("Show all: ");
+        System.out.println(response);
         System.out.println(response.getBody());
-        assertAll(
-                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
-                () -> assertTrue(response.getBody().length == 1)
-        );
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }
