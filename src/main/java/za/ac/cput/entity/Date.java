@@ -47,20 +47,27 @@ public class Date implements Serializable {
         return bookingNum;
     }
 
-    public void setDateNum(String dateNum) {
-        this.dateNum = dateNum;
+    @Override
+    public String toString() {
+        return "Date{" +
+                "dateNum='" + dateNum + '\'' +
+                ", venueAvailability='" + venueAvailability + '\'' +
+                ", venueId='" + venueId + '\'' +
+                ", bookingNum='" + bookingNum + '\'' +
+                '}';
     }
 
-    public void setVenueAvailability(String venueAvailability) {
-        this.venueAvailability = venueAvailability;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Date date = (Date) o;
+        return Objects.equals(dateNum, date.dateNum) && Objects.equals(venueAvailability, date.venueAvailability) && Objects.equals(venueId, date.venueId) && Objects.equals(bookingNum, date.bookingNum);
     }
 
-    public void setVenueId(String venueId) {
-        this.venueId = venueId;
-    }
-
-    public void setBookingNum(String bookingNum) {
-        this.bookingNum = bookingNum;
+    @Override
+    public int hashCode() {
+        return Objects.hash(dateNum, venueAvailability, venueId, bookingNum);
     }
 
     public static class Builder {
@@ -101,25 +108,6 @@ public class Date implements Serializable {
         }
     }
 
-    @Override
-    public boolean equals (Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Date date = (Date) o;
-        return dateNum.equals(date.dateNum) && venueAvailability.equals(date.venueAvailability) && venueId.equals(date.venueId) && bookingNum.equals(date.bookingNum);
-    }
 
-    @Override
-    public int hashCode() {return Objects.hash(dateNum, venueAvailability, venueId, bookingNum);}
-
-    @Override
-    public String toString() {
-        return "Date{" +
-                "dateNum='" + dateNum + '\'' +
-                ", venueAvailability='" + venueAvailability + '\'' +
-                ", venueId='" + venueId + '\'' +
-                ", bookingNum='" + bookingNum + '\'' +
-                '}';
-    }
 
 }
