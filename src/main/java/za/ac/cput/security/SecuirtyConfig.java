@@ -72,6 +72,32 @@ public class SecuirtyConfig
                 .build()
         );
 
+        //-- Roles for Date --
+        manager.createUser(User.withUsername("date-client")
+                .password(bCryptPasswordEncoder.encode("54321"))
+                .roles("CLIENT")
+                .build()
+        );
+
+        manager.createUser(User.withUsername("date-admin")
+                .password(bCryptPasswordEncoder.encode("12345"))
+                .roles("CLIENT", "ADMIN")
+                .build()
+        );
+
+        //-- Roles for Payment --
+        manager.createUser(User.withUsername("payment-client")
+                .password(bCryptPasswordEncoder.encode("54321"))
+                .roles("CLIENT")
+                .build()
+        );
+
+        manager.createUser(User.withUsername("payment-admin")
+                .password(bCryptPasswordEncoder.encode("12345"))
+                .roles("CLIENT", "ADMIN")
+                .build()
+        );
+
         return manager;
     }
 

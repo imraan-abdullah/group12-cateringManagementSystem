@@ -1,17 +1,19 @@
 package za.ac.cput.controller;
 
+/*
+ * DateControllerTest.java Controller Test for Date
+ * Shasta Abrahams - 217059376
+ * Date: 18 August 2022
+ * */
+
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import za.ac.cput.entity.Date;
 import za.ac.cput.factory.DateFactory;
-import za.ac.cput.service.impl.DateServiceImpl;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,13 +21,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 class DateControllerTest {
+
+    public static String ADMIN_SECURITY_USERNAME = "date-admin";
+    public static String ADMIN_SECURITY_PASSWORD = "12345";
+    public static String CLIENT_SECURITY_USERNAME = "date-client";
+    public static String CLIENT_SECURITY_PASSWORD = "54321";
+
     @LocalServerPort
     private int port;
 
     @Autowired private DateController controller;
     @Autowired private TestRestTemplate restTemplate;
 
-    private DateServiceImpl service;
     private Date date;
     private String baseUrl;
 
@@ -40,8 +47,12 @@ class DateControllerTest {
     @Order(1)
     void safe() {
         String url = baseUrl + "save";
-        ResponseEntity<Date> response = this.restTemplate.postForEntity(url, this.date, Date.class);
-        System.out.println(response);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<Date> entity = new HttpEntity<Date>(date, headers);
+        ResponseEntity<Date> response = restTemplate
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.POST, entity, Date.class);
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertNotNull(response.getBody())
@@ -52,9 +63,11 @@ class DateControllerTest {
     @Order(2)
     void read() {
         String url = baseUrl + "read/" + this.date.getDateNum();
-        System.out.println(url);
-        ResponseEntity<Date> response = this.restTemplate.getForEntity(url, Date.class);
-        System.out.println(response.toString());
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<Date> response = restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, Date.class);
         assertAll(
                 ()-> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 ()-> assertNotNull(response.getBody())
@@ -65,19 +78,29 @@ class DateControllerTest {
     @Order(4)
     void delete() {
         String url = baseUrl + "delete/"+ this.date.getDateNum();
-        this.restTemplate.delete(url);
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<Date> response = restTemplate
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.DELETE, entity, Date.class);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
     @Test
     @Order(3)
     void findAll() {
         String url = baseUrl + "all";
-        ResponseEntity<Date[]> response =
-                this.restTemplate.getForEntity(url, Date[].class);
-        System.out.println(Arrays.asList(response.getBody()));
-        assertAll(
-                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
-                () -> assertEquals(1, response.getBody().length)
-        );
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        ResponseEntity<String> response = restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, String.class);
+
+        System.out.println("Show all: ");
+        System.out.println(response);
+        System.out.println(response.getBody());
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }
