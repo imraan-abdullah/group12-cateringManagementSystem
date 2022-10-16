@@ -1,5 +1,11 @@
 package za.ac.cput.controller;
 
+/*
+ * PaymentControllerTest.java Controller Test for Payment
+ * Shasta Abrahams - 217059376
+ * Date: 18 August 2022
+ * */
+
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
