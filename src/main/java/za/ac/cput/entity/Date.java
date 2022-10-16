@@ -1,6 +1,6 @@
 package za.ac.cput.entity;
 
-/*  Date.java Entity for the Date
+/*  DateController.java Entity for the Date
     Author: Shasta Storme Abrahams (217059376)
     Date: 26 March 2022
 */
