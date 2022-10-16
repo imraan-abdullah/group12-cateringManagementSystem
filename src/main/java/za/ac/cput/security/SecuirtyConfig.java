@@ -124,6 +124,16 @@ public class SecuirtyConfig
                 .antMatchers(HttpMethod.GET, "/**/entertainment/all").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/**/entertainment/save").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/**/entertainment/delete").hasRole("ADMIN")
+                // -- Endpoints for Date
+                .antMatchers(HttpMethod.GET, "/**/date/read").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/date/all").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/**/date/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/**/date/delete").hasRole("ADMIN")
+                // -- Endpoints for Payment
+                .antMatchers(HttpMethod.GET, "/**/payment/read").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/payment/all").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/**/payment/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/**/payment/delete").hasRole("ADMIN")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
