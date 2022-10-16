@@ -1,6 +1,6 @@
 package za.ac.cput.controller;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
 
 //Mariam Gallie- 219094837
 // ClientControllerTest.java (controller Test package)
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.ResponseEntity;
 import za.ac.cput.entity.Booking;
 import za.ac.cput.entity.Client;
 import za.ac.cput.factory.ClientFactory;
@@ -21,6 +20,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 class ClientControllerTest{
+
+    public static String ADMIN_SECURITY_USERNAME = "client-admin";
+    public static String ADMIN_SECURITY_PASSWORD = "12345";
+    public static String CLIENT_SECURITY_USERNAME = "client-client";
+    public static String CLIENT_SECURITY_PASSWORD = "54321";
+
     @LocalServerPort
     private int port;
 
@@ -43,10 +48,12 @@ class ClientControllerTest{
     @Order(1)
     void save(){
         String url = baseUrl + "save";
-        System.out.println(url);
+//        System.out.println(url);
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<Client> entity = new HttpEntity<Client>(client, headers);
         ResponseEntity<Client>response = this.restTemplate
-                .postForEntity(url,this.client,Client.class);
-        System.out.println(response);
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.POST, entity, Client.class);
         assertAll(
                 ()-> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 ()-> assertNotNull(response.getBody())
@@ -57,8 +64,12 @@ class ClientControllerTest{
     @Order(2)
     void read(){
         String url = baseUrl + "read/" + this.client.getClientNum();
-        System.out.println(url);
-        ResponseEntity<Client> response = this.restTemplate.getForEntity(url,Client.class);
+//        System.out.println(url);
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<Client> response = this.restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, Client.class);
         assertAll(
                 ()-> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 ()-> assertNotNull(response.getBody())
@@ -68,19 +79,32 @@ class ClientControllerTest{
     @Order(3)
     void delete(){
         String url = baseUrl + "delete/"+ this.client.getClientNum();
-        this.restTemplate.delete(url);
+//        this.restTemplate.delete(url);
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<Client> response = restTemplate
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.DELETE, entity, Client.class);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
     @Test
     @Order(4)
     void findAll(){
         String url = baseUrl + "all";
-        System.out.println(url);
-        ResponseEntity<Client[]>response =
-                this.restTemplate.getForEntity(url,Client[].class);
-        System.out.println(Arrays.asList(response.getBody()));
+//        System.out.println(url);
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        ResponseEntity<String>response = restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, String.class);
+
+        System.out.println("Show all: ");
+        System.out.println(response);
+        System.out.println(response.getBody());
+
         assertAll(
-                ()-> assertEquals(HttpStatus.OK,response.getStatusCode()),
-                ()-> assertTrue(response.getBody().length==0)
+                ()-> assertEquals(HttpStatus.OK,response.getStatusCode())
         );
     }
 }
