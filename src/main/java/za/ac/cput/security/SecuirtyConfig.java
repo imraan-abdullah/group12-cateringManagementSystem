@@ -123,6 +123,31 @@ public class SecuirtyConfig
                 .build()
         );
 
+        //-- The Roles for Admin -- //
+        manager.createUser(User.withUsername("admin-client")
+                .password(bCryptPasswordEncoder.encode("54321"))
+                .roles("CLIENT")
+                .build()
+        );
+
+        manager.createUser(User.withUsername("admin-admin")
+                .password(bCryptPasswordEncoder.encode("12345"))
+                .roles("CLIENT", "ADMIN")
+                .build()
+        );
+
+        //-- The Roles for Login -- //
+        manager.createUser(User.withUsername("login-client")
+                .password(bCryptPasswordEncoder.encode("54321"))
+                .roles("CLIENT")
+                .build()
+        );
+
+        manager.createUser(User.withUsername("login-admin")
+                .password(bCryptPasswordEncoder.encode("12345"))
+                .roles("CLIENT", "ADMIN")
+                .build()
+        );
 
         return manager;
     }
@@ -135,6 +160,18 @@ public class SecuirtyConfig
                 .csrf().disable()
                 .formLogin().disable()
                 .authorizeRequests()
+
+                // -- The Endpoints for Admin -- //
+                .antMatchers(HttpMethod.GET, "/**/admin/read").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/admin/all").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/**/admin/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/**/admin/delete").hasRole("ADMIN")
+
+                // -- The Endpoints for Login -- //
+                .antMatchers(HttpMethod.GET, "/**/login/read").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/login/all").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/**/login/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/**/login/delete").hasRole("ADMIN")
 
                 // -- The Endpoints for Booking -- //
                 .antMatchers(HttpMethod.GET, "/**/booking/read").hasAnyRole("CLIENT", "ADMIN")

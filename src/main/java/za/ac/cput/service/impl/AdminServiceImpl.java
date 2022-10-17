@@ -20,19 +20,28 @@ public class AdminServiceImpl implements IAdminService {
     private final IAdminRepository repository;
 
     @Autowired
-    public AdminServiceImpl(IAdminRepository repository) {this.repository = repository;}
+    public AdminServiceImpl(IAdminRepository repository)
+    {this.repository = repository;}
 
-    public Admin save(Admin admin) {return this.repository.save(admin);}
+    @Override
+    public Admin save(Admin admin)
+    {return this.repository.save(admin);}
 
-    public Optional<Admin> read(String id) {return this.repository.findById(id);}
+    @Override
+    public Optional<Admin> read(String id)
+    {return this.repository.findById(id);}
 
-    public void delete(Admin admin) {this.repository.delete(admin);}
+    @Override
+    public void delete(Admin admin)
+    {this.repository.delete(admin);}
 
-    public List<Admin> findAll() {return this.repository.findAll();}
+    @Override
+    public List<Admin> findAll()
+    {return this.repository.findAll();}
 
+    @Override
     public void deleteById(String id){
         Optional<Admin> admin = read(id);
-        if (admin.isPresent())
-            delete(admin.get());
+        if (admin.isPresent())delete(admin.get());
     }
 }

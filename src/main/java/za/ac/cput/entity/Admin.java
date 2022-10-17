@@ -11,10 +11,11 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Admin {
+public class Admin implements Serializable {
 
     @Id @NotNull private String adminNum;
     @NotNull private String firstName;

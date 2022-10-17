@@ -9,6 +9,7 @@ package za.ac.cput.factory;
 
 import za.ac.cput.entity.Login;
 import za.ac.cput.util.Helper;
+import za.ac.cput.util.StringHelper;
 
 public class LoginFactory {
 
@@ -16,6 +17,7 @@ public class LoginFactory {
 
         //String loginId = Helper.generateId();
 
+        /*
         Login login = new Login.Builder().setLoginId(loginId)
                 .setAdminNum(adminNum)
                 .setAdminPassword(adminPassword)
@@ -24,5 +26,21 @@ public class LoginFactory {
 
     }
 
-}
+         */
 
+        StringHelper.checkStringParam("loginId", loginId);
+        StringHelper.checkStringParam("adminNum", adminNum);
+        StringHelper.checkStringParam("adminPassword", adminPassword);
+
+        StringHelper.isEmptyOrNull(adminNum);
+        StringHelper.isEmptyOrNull(adminPassword);
+        StringHelper.checkId(loginId);
+
+        return new Login.Builder()
+                .setLoginId(loginId)
+                .setAdminNum(adminNum)
+                .setAdminPassword(adminPassword)
+                .build();
+    }
+
+}

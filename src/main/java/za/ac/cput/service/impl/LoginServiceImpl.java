@@ -17,22 +17,31 @@ import java.util.Optional;
 
 @Service
 public class LoginServiceImpl implements ILoginService{
+
     private final ILoginRepository repository;
 
     @Autowired
-    public LoginServiceImpl(ILoginRepository repository) {this.repository = repository;}
+    public LoginServiceImpl(ILoginRepository repository)
+    {this.repository = repository;}
 
-    public Login save(Login login) {return this.repository.save(login);}
+    @Override
+    public Login save(Login login)
+    {return this.repository.save(login);}
 
-    public Optional<Login> read(String id) {return this.repository.findById(id);}
+    @Override
+    public Optional<Login> read(String id)
+    {return this.repository.findById(id);}
 
-    public void delete(Login login) {this.repository.delete(login);}
+    @Override
+    public void delete(Login login)
+    {this.repository.delete(login);}
 
-    public List<Login> findAll(){return this.repository.findAll();}
+    @Override
+    public List<Login> findAll()
+    {return this.repository.findAll();}
 
     public void deleteById(String id){
         Optional <Login> login = read(id);
-        if(login.isPresent())
-            delete(login.get());
+        if(login.isPresent())delete(login.get());
     }
 }

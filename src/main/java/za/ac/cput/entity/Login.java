@@ -10,10 +10,11 @@ package za.ac.cput.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Login {
+public class Login implements Serializable {
 
     @Id @NotNull
     @NotNull private String loginId;
@@ -32,13 +33,13 @@ public class Login {
     }
 
     public String getLoginId(){return loginId;}
-    public void setLoginId(String loginId) {this.loginId = loginId;}
+    //public void setLoginId(String loginId) {this.loginId = loginId;}
 
     public String getAdminNum(){return adminNum;}
-    public void setAdminNum(String adminNum) {this.adminNum = adminNum;}
+    //public void setAdminNum(String adminNum) {this.adminNum = adminNum;}
 
     public String getAdminPassword(){return adminPassword;}
-    public void setAdminPassword(String adminPassword) {this.adminPassword = adminPassword;}
+    //public void setAdminPassword(String adminPassword) {this.adminPassword = adminPassword;}
 
 
     @Override
