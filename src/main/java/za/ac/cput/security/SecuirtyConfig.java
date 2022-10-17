@@ -149,6 +149,28 @@ public class SecuirtyConfig
                 .build()
         );
 
+        /***-- The Roles for Inventory --*/
+        manager.createUser(User.withUsername("inventory-client")
+                .password(bCryptPasswordEncoder.encode("54321"))
+                .roles("CLIENT")
+                .build());
+
+        manager.createUser(User.withUsername("inventory-admin")
+                .password(bCryptPasswordEncoder.encode("12345"))
+                .roles("CLIENT", "ADMIN")
+                .build());
+
+        /***-- The Roles for Venue --*/
+        manager.createUser(User.withUsername("venue-client")
+                .password(bCryptPasswordEncoder.encode("54321"))
+                .roles("CLIENT")
+                .build());
+
+        manager.createUser(User.withUsername("venue-admin")
+                .password(bCryptPasswordEncoder.encode("12345"))
+                .roles("CLIENT", "ADMIN")
+                .build());
+
         return manager;
     }
 
@@ -210,6 +232,18 @@ public class SecuirtyConfig
                 .antMatchers(HttpMethod.GET, "/**/payment/all").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/**/payment/save").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/**/payment/delete").hasRole("ADMIN")
+
+                //-- Endpoints for Inventory --//
+                .antMatchers(HttpMethod.GET, "/**/inventory/read").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/inventory/all").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/inventory/save").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/inventory/delete").hasAnyRole("ADMIN")
+
+                //-- Endpoints for Venue --//
+                .antMatchers(HttpMethod.GET, "/**/venue/read").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/venue/all").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/venue/save").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/venue/delete").hasAnyRole("ADMIN")
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
