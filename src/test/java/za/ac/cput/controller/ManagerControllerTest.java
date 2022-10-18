@@ -5,9 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import za.ac.cput.entity.Chef;
 import za.ac.cput.entity.Manager;
+import za.ac.cput.entity.Staff;
 import za.ac.cput.factory.ManagerFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 class ManagerControllerTest {
+
+    public static String ADMIN_SECURITY_USERNAME = "manager-admin";
+    public static String ADMIN_SECURITY_PASSWORD = "12345";
+    public static String CLIENT_SECURITY_USERNAME = "manager-client";
+    public static String CLIENT_SECURITY_PASSWORD = "54321";
 
     @LocalServerPort
     private int port;
@@ -39,8 +45,13 @@ class ManagerControllerTest {
     @Order(1)
     void safe() {
         String url = baseUrl + "save";
-        ResponseEntity<Manager> response = this.restTemplate.postForEntity(url, this.manager, Manager.class);
-        System.out.println(response);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<Manager> entity = new HttpEntity<Manager>(manager, headers);
+        ResponseEntity<Manager> response = restTemplate
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.POST, entity, Manager.class);
+
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertNotNull(response.getBody())
@@ -51,7 +62,13 @@ class ManagerControllerTest {
     @Order(2)
     void read() {
         String url = baseUrl + "read/" + this.manager.getEmployeeId();
-        ResponseEntity<Manager> response = this.restTemplate.getForEntity(url, Manager.class);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<Manager> response = restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, Manager.class);
+
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertNotNull(response.getBody())
@@ -62,18 +79,31 @@ class ManagerControllerTest {
     @Order(4)
     void delete() {
         String url = baseUrl + "delete/" + this.manager.getEmployeeId();
-        this.restTemplate.delete(url);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<Manager> response = restTemplate
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.DELETE, entity, Manager.class);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
     @Test
     @Order(3)
     void findAll() {
         String url = baseUrl+ "all" ;
-        ResponseEntity<Manager[]> response = this.restTemplate.getForEntity(url, Manager[].class);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        ResponseEntity<String> response = restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, String.class);
+
+        System.out.println("Show all: ");
+        System.out.println(response);
         System.out.println(response.getBody());
-        assertAll(
-                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
-                () -> assertTrue(response.getBody().length == 1)
-        );
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }

@@ -149,6 +149,30 @@ public class SecuirtyConfig
                 .build()
         );
 
+        manager.createUser(User.withUsername("staff-client")
+                .password(bCryptPasswordEncoder.encode("54321"))
+                .roles("CLIENT")
+                .build()
+        );
+
+        manager.createUser(User.withUsername("staff-admin")
+                .password(bCryptPasswordEncoder.encode("12345"))
+                .roles("CLIENT", "ADMIN")
+                .build()
+        );
+
+        manager.createUser(User.withUsername("manager-client")
+                .password(bCryptPasswordEncoder.encode("54321"))
+                .roles("CLIENT")
+                .build()
+        );
+
+        manager.createUser(User.withUsername("manager-admin")
+                .password(bCryptPasswordEncoder.encode("12345"))
+                .roles("CLIENT", "ADMIN")
+                .build()
+        );
+
         return manager;
     }
 
@@ -160,6 +184,18 @@ public class SecuirtyConfig
                 .csrf().disable()
                 .formLogin().disable()
                 .authorizeRequests()
+
+                // -- Endpoints for Staff
+                .antMatchers(HttpMethod.GET, "/**/staff/read").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/staff/all").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/**/staff/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/**/staff/delete").hasRole("ADMIN")
+
+                // -- Endpoints for Manager
+                .antMatchers(HttpMethod.GET, "/**/manager/read").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/**/manager/all").hasAnyRole("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/**/manager/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/**/manager/delete").hasRole("ADMIN")
 
                 // -- The Endpoints for Admin -- //
                 .antMatchers(HttpMethod.GET, "/**/admin/read").hasAnyRole("CLIENT", "ADMIN")
