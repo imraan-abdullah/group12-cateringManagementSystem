@@ -7,6 +7,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import za.ac.cput.entity.Staff;
 import za.ac.cput.factory.StaffFactory;
 
@@ -16,6 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 
 class StaffControllerTest {
+
+    public static String ADMIN_SECURITY_USERNAME = "staff-admin";
+    public static String ADMIN_SECURITY_PASSWORD = "12345";
+    public static String CLIENT_SECURITY_USERNAME = "staff-client";
+    public static String CLIENT_SECURITY_PASSWORD = "54321";
 
     @LocalServerPort
     private int port;
@@ -40,8 +46,13 @@ class StaffControllerTest {
     @Order(1)
     void safe() {
         String url = baseUrl + "save";
-        ResponseEntity<Staff> response = this.restTemplate.postForEntity(url, this.staff, Staff.class);
-        System.out.println(response);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<Staff> entity = new HttpEntity<Staff>(staff, headers);
+        ResponseEntity<Staff> response = restTemplate
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.POST, entity, Staff.class);
+
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertNotNull(response.getBody())
@@ -52,7 +63,13 @@ class StaffControllerTest {
     @Order(2)
     void read() {
         String url = baseUrl + "read/" + this.staff.getEmployeeId();
-        ResponseEntity<Staff> response = this.restTemplate.getForEntity(url, Staff.class);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<Staff> response = restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, Staff.class);
+
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertNotNull(response.getBody())
@@ -63,18 +80,32 @@ class StaffControllerTest {
     @Order(4)
     void delete() {
         String url = baseUrl + "delete/" + this.staff.getEmployeeId();
-        this.restTemplate.delete(url);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+        ResponseEntity<Staff> response = restTemplate
+                .withBasicAuth(ADMIN_SECURITY_USERNAME, ADMIN_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.DELETE, entity, Staff.class);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+
     }
 
     @Test
     @Order(3)
     void findAll() {
         String url = baseUrl+ "all" ;
-        ResponseEntity<Staff[]> response = this.restTemplate.getForEntity(url, Staff[].class);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        ResponseEntity<String> response = restTemplate
+                .withBasicAuth(CLIENT_SECURITY_USERNAME, CLIENT_SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, String.class);
+
+        System.out.println("Show all: ");
+        System.out.println(response);
         System.out.println(response.getBody());
-        assertAll(
-                () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
-                () -> assertTrue(response.getBody().length == 1)
-        );
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }
