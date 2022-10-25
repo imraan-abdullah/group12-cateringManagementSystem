@@ -96,7 +96,7 @@ class ChefControllerTest
     }
 
     @Test
-    @Order(4)
+    @Order(3)
     void findAll()
     {
         String url = baseUrl + "all";

@@ -20,6 +20,8 @@ import za.ac.cput.service.IChefService;
 import javax.validation.Valid;
 import java.util.List;
 
+//@CrossOrigin(origins= {"*"}, maxAge = 4800, allowCredentials = "false" )
+//@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("cateringManagementSystem/chef/")
 @Slf4j
@@ -35,6 +37,7 @@ public class ChefController
     }
 
     @PostMapping("save")
+    //@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Chef> safe(@Valid @RequestBody Chef chef)
     {
         log.info("Save request:{}", chef);
@@ -52,6 +55,7 @@ public class ChefController
     }
 
     @GetMapping("read/{id}")
+    //@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Chef> read(@PathVariable String id)
     {
         log.info("Read request:{}", id);
@@ -62,6 +66,7 @@ public class ChefController
     }
 
     @DeleteMapping("delete/{id}")
+    //@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<Void> delete(@PathVariable String id)
     {
         log.info("Read request:{}", id);
@@ -70,6 +75,7 @@ public class ChefController
     }
 
     @GetMapping("all")
+    //@CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<Chef>> findAll()
     {
         List <Chef> chef = this.service.findAll();
