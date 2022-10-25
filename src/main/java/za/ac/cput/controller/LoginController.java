@@ -28,7 +28,7 @@ public class LoginController {
     @Autowired
     public LoginController(ILoginService service){this.service = service;}
 
-    @PostMapping("login")
+    @PostMapping("save")
     public ResponseEntity<Login> safe(@Valid @RequestBody Login login)
     {
         log.info("Save request:{}", login);
