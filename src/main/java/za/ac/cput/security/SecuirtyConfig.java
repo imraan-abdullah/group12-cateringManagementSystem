@@ -17,21 +17,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
-public class SecuirtyConfig
-{
+public class SecuirtyConfig {
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder()
-    {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder)
-    {
+    public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder) {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         //-- Roles for Chef --
         manager.createUser(User.withUsername("chef-client")
@@ -199,12 +197,9 @@ public class SecuirtyConfig
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
-    {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and()
-                .csrf().disable()
-                .formLogin().disable()
                 .authorizeRequests()
 
                 // -- Endpoints for Staff
@@ -282,11 +277,20 @@ public class SecuirtyConfig
                 .antMatchers(HttpMethod.GET, "/**/venue/save").hasAnyRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/venue/delete").hasAnyRole("ADMIN")
                 .and()
+                .cors()
+                .and()
+                .csrf().disable()
+                .formLogin().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         return http.build();
 
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }
