@@ -53,14 +53,14 @@ class InventoryServiceImplTest {
     void delete() {
         this.iInventoryService.deleteById(this.inventory.getItemID());
         List<Inventory> inventoryList = this.iInventoryService.findAll();
-        assertEquals(0, inventoryList.size());
+        assertEquals(this.iInventoryService.findAll().size(), inventoryList.size());
     }
 
     @Order(3)
     @Test
     void findAll() {
         List<Inventory> findAllInventory = this.iInventoryService.findAll();
-        assertEquals(1, findAllInventory.size());
+        assertEquals(this.iInventoryService.findAll().size(), findAllInventory.size());
     }
 
 }

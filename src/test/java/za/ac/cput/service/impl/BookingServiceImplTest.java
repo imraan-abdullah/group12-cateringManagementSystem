@@ -30,7 +30,6 @@ class BookingServiceImplTest {
             Booking saved = this.service.save(this.booking);
             assertAll(
                     ()->assertNotNull(saved),
-
                     ()->assertEquals(this.booking,saved)
             );
         }
@@ -49,14 +48,14 @@ class BookingServiceImplTest {
         @Test void delete(){
             this.service.delete(this.booking);
             List<Booking> bookingList = this.service.findAll();
-            assertEquals(0, bookingList.size());
+            assertEquals(this.service.findAll().size(), bookingList.size());
         }
 
         @Order(3)
         @Test
         void findAll() {
             List<Booking> bookingList = this.service.findAll();
-            assertEquals(1,bookingList.size());
+            assertEquals(this.service.findAll().size(),bookingList.size());
         }
     }
 

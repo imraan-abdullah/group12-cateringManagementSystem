@@ -31,6 +31,7 @@ public class SecuirtyConfig {
     @Bean
     public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder) {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+
         //-- Roles for Chef --
         manager.createUser(User.withUsername("chef-client")
                 .password(bCryptPasswordEncoder.encode("54321"))
@@ -169,6 +170,7 @@ public class SecuirtyConfig {
                 .roles("CLIENT", "ADMIN")
                 .build());
 
+        /***-- The Roles for Staff --*/
         manager.createUser(User.withUsername("staff-client")
                 .password(bCryptPasswordEncoder.encode("54321"))
                 .roles("CLIENT")
@@ -181,6 +183,7 @@ public class SecuirtyConfig {
                 .build()
         );
 
+        /***-- The Roles for Manager --*/
         manager.createUser(User.withUsername("manager-client")
                 .password(bCryptPasswordEncoder.encode("54321"))
                 .roles("CLIENT")
@@ -244,21 +247,25 @@ public class SecuirtyConfig {
                 .antMatchers(HttpMethod.GET, "/**/chef/all").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/**/chef/save").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/**/chef/delete").hasRole("ADMIN")
+
                 // -- Endpoints for WaitingStaff
                 .antMatchers(HttpMethod.GET, "/**/waitingStaff/read").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/waitingStaff/all").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/**/waitingStaff/save").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/**/waitingStaff/delete").hasRole("ADMIN")
+
                 // -- Endpoints for Entertainment
                 .antMatchers(HttpMethod.GET, "/**/entertainment/read").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/entertainment/all").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/**/entertainment/save").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/**/entertainment/delete").hasRole("ADMIN")
+
                 // -- Endpoints for Date
                 .antMatchers(HttpMethod.GET, "/**/date/read").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/date/all").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/**/date/save").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/**/date/delete").hasRole("ADMIN")
+
                 // -- Endpoints for Payment
                 .antMatchers(HttpMethod.GET, "/**/payment/read").hasAnyRole("CLIENT", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/payment/all").hasAnyRole("CLIENT", "ADMIN")
@@ -285,7 +292,6 @@ public class SecuirtyConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         return http.build();
-
     }
 
     @Bean

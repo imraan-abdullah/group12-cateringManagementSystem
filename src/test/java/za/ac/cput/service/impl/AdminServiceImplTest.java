@@ -57,14 +57,14 @@ class AdminServiceImplTest {
     void delete() {
         this.service.delete(this.admin);
         List<Admin> adminList = this.service.findAll();
-        assertEquals(0, adminList.size());
+        assertEquals(this.service.findAll().size(), adminList.size());
     }
 
     @Order(3)
     @Test
     void findAll() {
         List<Admin> adminList = this.service.findAll();
-        assertEquals(1, adminList.size());
+        assertEquals(this.service.findAll().size(), adminList.size());
     }
 
 }

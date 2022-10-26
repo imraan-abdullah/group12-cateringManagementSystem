@@ -38,7 +38,8 @@ class WaitingStaffServiceImplTest
         WaitingStaff saved = this.service.save(this.waitingStaff);
         System.out.println(saved.toString());
         assertAll(
-                () -> assertNotNull(saved)
+                () -> assertNotNull(saved),
+                () -> assertEquals(this.waitingStaff,saved)
         );
     }
 
@@ -48,7 +49,8 @@ class WaitingStaffServiceImplTest
         Optional<WaitingStaff> read = this.service.read(this.waitingStaff.getEmployeeId());
         System.out.println(read);
         assertAll(
-                () -> assertTrue(read.isPresent())
+                () -> assertTrue(read.isPresent()),
+                ()->assertEquals(this.waitingStaff,read.get())
         );
     }
 
@@ -56,7 +58,7 @@ class WaitingStaffServiceImplTest
     @Test
     void findAll() {
         List<WaitingStaff> waitingStaffList = this.service.findAll();
-        assertEquals(1, waitingStaffList.size());
+        assertEquals(this.service.findAll().size(), waitingStaffList.size());
     }
 
     @Order(4)
@@ -64,6 +66,6 @@ class WaitingStaffServiceImplTest
     void delete() {
         this.service.deleteById(this.waitingStaff.getEmployeeId());
         List<WaitingStaff> waitingStaffList = this.service.findAll();
-        assertEquals(0, waitingStaffList.size());
+        assertEquals(this.service.findAll().size(), waitingStaffList.size());
     }
 }

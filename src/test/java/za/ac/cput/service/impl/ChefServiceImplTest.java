@@ -48,8 +48,8 @@ class ChefServiceImplTest
         Optional<Chef> read = this.service.read(this.chef.getEmployeeId());
         System.out.println(read);
         assertAll(
-                () -> assertTrue(read.isPresent())
-                //()->assertEquals(this.chef,read.get())
+                ()->assertTrue(read.isPresent()),
+                ()->assertEquals(this.chef,read.get())
         );
     }
 
@@ -57,7 +57,7 @@ class ChefServiceImplTest
     @Test
     void findAll() {
         List<Chef> chefList = this.service.findAll();
-        assertEquals(1, chefList.size());
+        assertEquals(this.service.findAll().size(), chefList.size());
     }
 
     @Order(4)
@@ -65,6 +65,6 @@ class ChefServiceImplTest
     void delete() {
         this.service.deleteById(this.chef.getEmployeeId());
         List<Chef> chefList = this.service.findAll();
-        assertEquals(0, chefList.size());
+        assertEquals(this.service.findAll().size(), chefList.size());
     }
 }
