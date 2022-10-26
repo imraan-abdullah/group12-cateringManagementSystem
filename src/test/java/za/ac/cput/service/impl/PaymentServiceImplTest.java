@@ -31,7 +31,6 @@ class PaymentServiceImplTest {
         Payment saved = this.service.save(this.payment);
         assertAll(
                 ()-> assertNotNull(saved),
-
                 ()-> assertEquals(this.payment,saved)
         );
     }
@@ -51,7 +50,7 @@ class PaymentServiceImplTest {
     @Test
     void findAll() {
         List<Payment> paymentList = this.service.findAll();
-        assertEquals(1,paymentList.size());
+        assertEquals(this.service.findAll().size(),paymentList.size());
     }
 
     @Order(4)
@@ -59,6 +58,6 @@ class PaymentServiceImplTest {
     void delete() {
         this.service.deleteById(this.payment.getPaymentNum());
         List<Payment> paymentList = this.service.findAll();
-        assertEquals(0, paymentList.size());
+        assertEquals(this.service.findAll().size(), paymentList.size());
     }
 }

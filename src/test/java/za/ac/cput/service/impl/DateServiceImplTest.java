@@ -30,7 +30,6 @@ class DateServiceImplTest {
         Date saved = this.service.save(this.date);
         assertAll(
                 () -> assertNotNull(saved),
-
                 ()->assertEquals(this.date,saved)
         );
     }
@@ -50,7 +49,7 @@ class DateServiceImplTest {
     @Test
     void findAll() {
         List<Date> dateList = this.service.findAll();
-        assertEquals(1,dateList.size());
+        assertEquals(this.service.findAll().size(),dateList.size());
     }
 
     @Order(4)
@@ -58,6 +57,6 @@ class DateServiceImplTest {
     void delete() {
         this.service.deleteById(this.date.getDateNum());
         List<Date> dateList = this.service.findAll();
-        assertEquals(0, dateList.size());
+        assertEquals(this.service.findAll().size(), dateList.size());
     }
 }

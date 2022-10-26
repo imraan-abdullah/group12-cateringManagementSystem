@@ -34,7 +34,6 @@ class ClientServiceImplTest {
         Client saved = this.service.save(this.client);
         assertAll(
                 ()->assertNotNull(saved),
-
                 ()->assertEquals(this.client,saved)
         );
     }
@@ -53,13 +52,13 @@ class ClientServiceImplTest {
     @Test void delete(){
         this.service.delete(this.client);
         List<Client> clientList = this.service.findAll();
-        assertEquals(0, clientList.size());
+        assertEquals(this.service.findAll().size(), clientList.size());
     }
 
     @Order(3)
     @Test
     void findAll() {
         List<Client> clientList = this.service.findAll();
-        assertEquals(1,clientList.size());
+        assertEquals(this.service.findAll().size(),clientList.size());
     }
 }

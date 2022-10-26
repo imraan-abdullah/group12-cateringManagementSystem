@@ -54,14 +54,14 @@ class VenueServiceImplTest {
     void delete() {
         this.iVenueService.deleteById(this.venue.getVenueID());
         List<Venue> venueList = this.iVenueService.findAll();
-        assertEquals(0, venueList.size());
+        assertEquals(this.iVenueService.findAll().size(), venueList.size());
     }
 
     @Order(3)
     @Test
     void findAll() {
         List<Venue> findAllVenue = this.iVenueService.findAll();
-        assertEquals(1, findAllVenue.size());
+        assertEquals(this.iVenueService.findAll().size(), findAllVenue.size());
 
     }
 }

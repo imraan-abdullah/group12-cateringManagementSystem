@@ -58,14 +58,14 @@ class LoginServiceImplTest {
     void delete() {
         this.service.delete(this.login);
         List<Login> loginList = this.service.findAll();
-        assertEquals(0, loginList.size());
+        assertEquals(this.service.findAll().size(), loginList.size());
     }
 
     @Order(3)
     @Test
     void findAll() {
         List<Login> loginList = this.service.findAll();
-        assertEquals(1, loginList.size());
+        assertEquals(this.service.findAll().size(), loginList.size());
     }
 
 }

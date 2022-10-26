@@ -37,7 +37,8 @@ class EntertainmentServiceImplTest
     void save() {
         Entertainment saved = this.service.save(this.entertainment);
         assertAll(
-                () -> assertNotNull(saved)
+                () -> assertNotNull(saved),
+                ()->assertEquals(this.entertainment,saved)
         );
     }
 
@@ -47,7 +48,8 @@ class EntertainmentServiceImplTest
         Optional<Entertainment> read = this.service.read(this.entertainment.getEntertainmentType());
         System.out.println(read);
         assertAll(
-                () -> assertTrue(read.isPresent())
+                () -> assertTrue(read.isPresent()),
+                ()-> assertEquals(this.entertainment,read.get())
         );
     }
 
@@ -55,7 +57,7 @@ class EntertainmentServiceImplTest
     @Test
     void findAll() {
         List<Entertainment> entertainmentList = this.service.findAll();
-        assertEquals(1, entertainmentList.size());
+        assertEquals(this.service.findAll().size(), entertainmentList.size());
     }
 
     @Order(4)
@@ -63,6 +65,6 @@ class EntertainmentServiceImplTest
     void delete() {
         this.service.deleteById(this.entertainment.getEntertainmentType());
         List<Entertainment> entertainmentList = this.service.findAll();
-        assertEquals(0, entertainmentList.size());
+        assertEquals(this.service.findAll().size(), entertainmentList.size());
     }
 }

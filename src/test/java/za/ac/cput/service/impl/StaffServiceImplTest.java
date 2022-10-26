@@ -32,7 +32,6 @@ class StaffServiceImplTest {
         System.out.println(saved.toString());
         assertAll(
                 () -> assertNotNull(saved),
-
                 ()->assertEquals(this.staff,saved)
         );
     }
@@ -44,7 +43,6 @@ class StaffServiceImplTest {
         System.out.println(read);
         assertAll(
                 () -> assertTrue(read.isPresent()),
-
                 ()->assertEquals(this.staff,read.get())
         );
     }
@@ -54,14 +52,14 @@ class StaffServiceImplTest {
     void delete() {
         this.service.deleteById(this.staff.getEmployeeId());
         List<Staff> StaffList = this.service.findAll();
-        assertEquals(0, StaffList.size());
+        assertEquals(this.service.findAll().size(), StaffList.size());
     }
 
     @Order(3)
     @Test
     void findAll() {
         List<Staff> StaffList = this.service.findAll();
-        assertEquals(1, StaffList.size());
+        assertEquals(this.service.findAll().size(), StaffList.size());
     }
 
 }
